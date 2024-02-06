@@ -10,13 +10,26 @@ export const metadata: Metadata = {
     "TripApp PŁ to aplikacja PWA stworzona specjalnie dla uczestników wyjazdów organizowanych przez Samorządu Studenckiego Politechniki Łódzkiej, takich jak Adapciak czy Zimowiska. Znajdziesz w niej kompleksowe informacje dotyczące kadry, harmonogramu wycieczki oraz kanał komunikacyjny, zapewniający sprawną wymianę informacji.",
   generator: "Next.js",
   manifest: "/manifest.json",
+  icons: [
+    {
+      url: "/icons/favicon.ico",
+      type: "image/x-icon",
+    },
+    {
+      url: "/icons/favicon-16x16.png",
+      sizes: "16x16",
+    },
+    {
+      url: "/icons/favicon-32x32.png",
+      sizes: "32x32",
+    },
+  ],
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  userScalable: false,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fff" },
     { media: "(prefers-color-scheme: dark)", color: "#fff" },
