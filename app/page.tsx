@@ -19,9 +19,18 @@ export default async function Index() {
     }
   };
 
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    redirect("/login");
+  }
+
   const isSupabaseConnected = canInitSupabaseClient();
 
-  let { data: module, error } = await supabase
+  let { data: module } = await supabase
     .from("module")
     .select("*")
     .is("isVisible", true);

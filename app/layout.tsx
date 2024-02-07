@@ -3,9 +3,6 @@ import type { Metadata } from "next";
 import type { Viewport } from "next";
 
 import "./globals.css";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "ZimowiskApp",
@@ -44,15 +41,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/login");
-  }
   return (
     <html lang="pl" className={GeistSans.className}>
       <body className="bg-background text-foreground h-screen overflow-hidden">
