@@ -1,8 +1,9 @@
-import AuthButton from "../components/AuthButton";
+import AuthButton from "./components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { capitalizeFirstLetter } from "./lib/capitalizeFirstLetter";
 
 export default async function Index() {
   const cookieStore = cookies();
@@ -48,14 +49,13 @@ export default async function Index() {
             <ul className="menu rounded-box">
               {module &&
                 module?.map((e, i) => (
-                  <>
-                    <li>
-                      <Link href={e.name} className="btn-ghost text-lg py-4">
-                        {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
-                      </Link>
-                    </li>
+                  <li key={i}>
+                    <Link href={e.name} className="btn-ghost text-lg py-4">
+                      {capitalizeFirstLetter(e.name)}
+                    </Link>
+
                     {i !== module!.length - 1 && <hr />}
-                  </>
+                  </li>
                 ))}
             </ul>
           </div>
