@@ -27,14 +27,9 @@ async function Kadra() {
         <h1 className="font-bold text-xl">Kadra</h1>
       </div>
 
-      <div className="animate-in flex-1 w-full items-center flex">
-        <div className="w-full h-[85vh] overflow-y-scroll">
-          <main className="grid grid-cols-2 w-full gap-4">
-            {user &&
-              user?.map((user) => <ProfileCard user={user} key={user.id} />)}
-          </main>
-        </div>
-      </div>
+      <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5 mt-6 mb-10">
+        {user && user?.map((user) => <ProfileCard user={user} key={user.id} />)}
+      </main>
     </div>
   );
 }

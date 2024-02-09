@@ -37,7 +37,7 @@ export default async function Index() {
     .is("isVisible", true);
 
   return (
-    <div className="container mx-auto flex min-h-screen flex-col items-center">
+    <div className="container mx-auto flex h-screen flex-col items-center">
       <div className="w-full flex justify-center items-center border-b border-b-foreground/10 h-12">
         <h1 className="font-bold text-xl">TripApp</h1>
       </div>
