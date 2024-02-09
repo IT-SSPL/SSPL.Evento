@@ -8,12 +8,14 @@ interface IUser {
   surname: string;
   role: string;
   email: string;
+  description: string;
+  phone: string;
 }
 
 export const ProfileCard = ({ user }: { user: IUser }) => {
   return (
     <Link
-      href="/"
+      href={`/profile/${user.id}`}
       className="card card-compact bg-base-100 shadow-xl max-h-72 w-full"
     >
       <figure>

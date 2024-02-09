@@ -1,29 +1,24 @@
-export default function Header() {
+import { IoIosArrowRoundBack } from "react-icons/io";
+import Link from "next/link";
+
+export default function Header({
+  title,
+  isReturn,
+}: {
+  title: string;
+  isReturn?: boolean;
+}) {
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center"></div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
+    <header className="w-full relative flex justify-center items-center border-b border-b-foreground/10 h-12">
+      {isReturn && (
+        <Link
+          href="/"
+          className="absolute left-2 text-3xl btn btn-sm btn-info btn-outline"
         >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
-    </div>
+          <IoIosArrowRoundBack />
+        </Link>
+      )}
+      <h1 className="font-bold text-xl">{title}</h1>
+    </header>
   );
 }

@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "./lib/capitalizeFirstLetter";
+import Header from "./components/Header";
 
 export default async function Index() {
   const cookieStore = cookies();
@@ -38,9 +39,7 @@ export default async function Index() {
 
   return (
     <div className="container mx-auto flex h-screen flex-col items-center">
-      <div className="w-full flex justify-center items-center border-b border-b-foreground/10 h-12">
-        <h1 className="font-bold text-xl">TripApp</h1>
-      </div>
+      <Header title="TripApp" />
 
       <div className="animate-in flex-1 flex flex-col w-full">
         <main className="flex-1 flex flex-col gap-4 w-full justify-center">
@@ -49,14 +48,10 @@ export default async function Index() {
             <ul className="menu rounded-box">
               {module &&
                 module?.map((e, i) => (
-                  <li key={i}>
-                    <Link href={e.name} className="btn-ghost text-lg py-2">
+                  <li key={i} className="border-b">
+                    <Link href={e.name} className="btn-ghost text-lg py-4">
                       {capitalizeFirstLetter(e.name)}
                     </Link>
-
-                    {i !== module!.length - 1 && (
-                      <div className="divider p-0 m-0" />
-                    )}
                   </li>
                 ))}
             </ul>
