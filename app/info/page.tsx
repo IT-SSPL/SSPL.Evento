@@ -2,8 +2,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import Header from "../components/Header";
 
-async function Harmonogram() {
+async function InfoPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -12,7 +13,12 @@ async function Harmonogram() {
     redirect("/");
   }
 
-  return <p>Harmonogram | {data.user.email}</p>;
+  return (
+    <>
+      <Header title="Informacje" isReturn />
+      <p>Informacje | {data.user.email}</p>;
+    </>
+  );
 }
 
-export default Harmonogram;
+export default InfoPage;

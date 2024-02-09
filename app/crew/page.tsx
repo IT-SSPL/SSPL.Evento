@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { ProfileCard } from "@/app/components/ProfileCard";
 import Header from "../components/Header";
 
-async function KadraPage() {
+async function CrewPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -29,4 +29,4 @@ async function KadraPage() {
   );
 }
 
-export default KadraPage;
+export default CrewPage;

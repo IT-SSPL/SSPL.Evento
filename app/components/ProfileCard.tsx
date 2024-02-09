@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { capitalizeFirstLetter } from "../lib/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 interface IUser {
   id: string;

@@ -2,8 +2,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import Header from "../components/Header";
 
-async function Informacje() {
+async function TrailsPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -12,7 +13,12 @@ async function Informacje() {
     redirect("/");
   }
 
-  return <p>Informacje | {data.user.email}</p>;
+  return (
+    <>
+      <Header title="Trasy" isReturn />
+      <p>Trasy | {data.user.email}</p>;
+    </>
+  );
 }
 
-export default Informacje;
+export default TrailsPage;

@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { CodeInputContainer } from "@/app/components/CodeInputContainer";
 
-export default function Login({
+export default function LoginCodePage({
   searchParams,
 }: {
   searchParams: { message: string; email: string };

@@ -3,10 +3,10 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { capitalizeFirstLetter } from "./lib/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import Header from "./components/Header";
 
-export default async function Index() {
+export default async function IndexPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -49,7 +49,7 @@ export default async function Index() {
               {module &&
                 module?.map((e, i) => (
                   <li key={i} className="border-b">
-                    <Link href={e.name} className="btn-ghost text-lg py-4">
+                    <Link href={e.path} className="btn-ghost text-lg py-4">
                       {capitalizeFirstLetter(e.name)}
                     </Link>
                   </li>
