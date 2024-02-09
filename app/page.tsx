@@ -50,11 +50,13 @@ export default async function Index() {
               {module &&
                 module?.map((e, i) => (
                   <li key={i}>
-                    <Link href={e.name} className="btn-ghost text-lg py-4">
+                    <Link href={e.name} className="btn-ghost text-lg py-2">
                       {capitalizeFirstLetter(e.name)}
                     </Link>
 
-                    {i !== module!.length - 1 && <hr />}
+                    {i !== module!.length - 1 && (
+                      <div className="divider p-0 m-0" />
+                    )}
                   </li>
                 ))}
             </ul>

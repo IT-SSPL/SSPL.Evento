@@ -11,14 +11,13 @@ export default function Login({
   const validateCode = async (formData: FormData) => {
     "use server";
 
-    const num1 = formData.get("num1") as string;
-    const num2 = formData.get("num2") as string;
-    const num3 = formData.get("num3") as string;
-    const num4 = formData.get("num4") as string;
-    const num5 = formData.get("num5") as string;
-    const num6 = formData.get("num6") as string;
-
-    const token = `${num1}${num2}${num3}${num4}${num5}${num6}`;
+    const token =
+      (formData.get("num1") as string) +
+      formData.get("num2") +
+      formData.get("num3") +
+      formData.get("num4") +
+      formData.get("num5") +
+      formData.get("num6");
 
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);

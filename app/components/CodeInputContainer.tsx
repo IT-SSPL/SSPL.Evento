@@ -1,9 +1,9 @@
 "use client";
+
 import React, { useRef, useState } from "react";
 
 export const CodeInputContainer = () => {
-  const numberOfDigits = 6;
-  const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const otpBoxReference = useRef([]);
 
   function handleChange(value: string, i: number) {
@@ -12,7 +12,7 @@ export const CodeInputContainer = () => {
     otpCopy[i] = numericValue;
     setOtp(otpCopy);
 
-    if (value && i < numberOfDigits - 1) {
+    if (value && i < 5) {
       (otpBoxReference.current[i + 1] as HTMLElement).focus();
     }
   }
@@ -35,6 +35,7 @@ export const CodeInputContainer = () => {
       {otp.map((digit, i) => (
         <input
           key={i}
+          name={`num${i + 1}`}
           className="input input-bordered input-info px-0 text-center"
           type="text"
           placeholder="●"
