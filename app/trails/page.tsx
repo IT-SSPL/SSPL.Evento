@@ -17,7 +17,7 @@ async function TrailsPage() {
   }
 
   return (
-    <PageWrapper title="Trasy" isReturn>
+    <PageWrapper title="Trasy" hasSidebar>
       <main className="animate-in w-full flex justify-center">
         <div className="card bg-base-100 shadow-xl">
           <figure>

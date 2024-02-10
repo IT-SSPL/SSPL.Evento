@@ -7,4 +7,5 @@ export interface IUser {
   description: string;
   phone: string;
   image_path: string;
+  room: string;
 }

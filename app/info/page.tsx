@@ -16,6 +16,14 @@ function InfoPage() {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        redirect("/login");
+      }
+
       const { data, error } = await supabase.auth.getUser();
       if (error || !data?.user) {
         redirect("/");
@@ -56,7 +64,7 @@ function InfoPage() {
   }
 
   return (
-    <PageWrapper title="Informacje" isReturn>
+    <PageWrapper title="Informacje" hasSidebar>
       <main className="animate-in flex-1 w-full mb-12" id="messageContainer">
         {allMessages &&
           allMessages?.map((message: MessageType) => (

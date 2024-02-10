@@ -14,7 +14,7 @@ async function SchedulePage() {
   }
 
   return (
-    <PageWrapper title="Harmonogram" isReturn>
+    <PageWrapper title="Harmonogram" hasSidebar>
       <p>Harmonogram | {data.user.email}</p>;
     </PageWrapper>
   );

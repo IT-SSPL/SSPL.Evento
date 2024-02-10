@@ -14,15 +14,13 @@ async function CrewPage() {
     redirect("/");
   }
 
-  console.log();
-
   let { data: user } = await supabase
     .from("user")
     .select("*")
     .like("role", "kadra");
 
   return (
-    <PageWrapper title="Kadra" isReturn>
+    <PageWrapper title="Kadra" hasSidebar>
       <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5">
         {user && user?.map((user) => <ProfileCard user={user} key={user.id} />)}
       </main>

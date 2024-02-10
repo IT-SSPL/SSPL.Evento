@@ -53,7 +53,7 @@ export default async function IndexPage() {
               ))}
           </ul>
         </main>
-        <AuthButton />{" "}
+        <AuthButton />
         {/* //TODO: przenieść przycisk do wylogowania do side menu */}
       </div>
       <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs fixed bottom-0 bg-background left-0 max-h-12">
