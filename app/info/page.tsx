@@ -6,6 +6,7 @@ import PageWrapper from "../components/PageWrapper";
 import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
 import { useEffect, useRef, useState } from "react";
+import CustomIcon from "../components/CustomIcon";
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
@@ -56,7 +57,8 @@ function InfoPage() {
   }, [allMessages]);
 
   const scrollToBottom = () => {
-    messagesContainerRef.current?.scrollIntoView({
+    if (!messagesContainerRef.current) return;
+    (messagesContainerRef.current as HTMLElement).scrollIntoView({
       block: "end",
     });
   };
@@ -69,7 +71,15 @@ function InfoPage() {
   }
 
   return (
-    <PageWrapper title="Informacje" isReturn>
+    <PageWrapper
+      title={
+        <>
+          <CustomIcon name="infoModuleIcon" className="mr-2" />
+          Informacje
+        </>
+      }
+      isReturn
+    >
       <main
         className="animate-in flex-1 w-full pb-28"
         id="messageContainer"

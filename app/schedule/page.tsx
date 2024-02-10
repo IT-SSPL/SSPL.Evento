@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 import PageWrapper from "../components/PageWrapper";
+import CustomIcon from "../components/CustomIcon";
 
 async function SchedulePage() {
   const cookieStore = cookies();
@@ -18,7 +19,15 @@ async function SchedulePage() {
   let { data: scheduleEntries } = await supabase.from("schedules").select("*");
 
   return (
-    <PageWrapper title="Harmonogram" isReturn>
+    <PageWrapper
+      title={
+        <>
+          <CustomIcon name="crewModuleIcon" className="mr-2" />
+          Harmonogram
+        </>
+      }
+      isReturn
+    >
       <main className="animate-in w-full flex flex-col">
         {days &&
           days.map((day) => (
@@ -26,12 +35,15 @@ async function SchedulePage() {
               <div className="collapse bg-info">
                 <input type="checkbox" />
                 <div className="collapse-title text-xl font-medium">
-                  {day.name}
+                  <div className="flex items-center">
+                    <CustomIcon name={`${day.name}DayIcon`} className="mr-2" />
+                    {day.display_name}
+                  </div>
                 </div>
                 <div className="collapse-content">
                   {scheduleEntries &&
                     scheduleEntries
-                      .filter((entry) => entry.day === day.name)
+                      .filter((entry) => entry.day === day.display_name)
                       .map((entry) => (
                         <div className="flex justify-between">
                           <p>{entry.time}</p>

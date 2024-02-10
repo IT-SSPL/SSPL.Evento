@@ -28,6 +28,15 @@ export const ProfileInfo = ({ user }: { user: IUser }) => {
           <div className="divider m-0.5" />
         </>
       )}
+      {user.room && (
+        <>
+          <div className="join-item flex items-baseline">
+            <p className="font-bold text-lg">Pokój:</p>
+            <p className="ml-2">{user.room}</p>
+          </div>
+          <div className="divider m-0.5" />
+        </>
+      )}
       {user.description && (
         <div className="join-item flex items-baseline">
           <p className="font-bold text-lg">Opis:</p>

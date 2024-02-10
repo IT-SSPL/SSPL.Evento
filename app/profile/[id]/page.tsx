@@ -70,7 +70,7 @@ const ProfilePage = async ({
   };
 
   return (
-    <PageWrapper title={`Profil użytkownika`} isReturn>
+    <PageWrapper title={`Profil użytkownika`} isReturn returnPath="/crew">
       <main className="animate-in flex-1 flex flex-col w-full">
         <div className="join pt-4 pb-6">
           <div className="avatar join-item">

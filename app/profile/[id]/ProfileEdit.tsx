@@ -42,6 +42,9 @@ export const ProfileEdit = ({ user }: { user: IUser }) => {
       <InputRow label="Telefon" value={user.phone} name="phone" />
       <div className="divider m-0.5" />
 
+      <InputRow label="Pokój" value={user.phone} name="room" />
+      <div className="divider m-0.5" />
+
       <div className="join-item flex items-baseline">
         <p className="font-bold text-lg">Opis:</p>
         <textarea

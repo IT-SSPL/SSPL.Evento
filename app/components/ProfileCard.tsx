@@ -24,9 +24,9 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
         <h2 className="card-title">
           {user.name} {user.surname}
         </h2>
-        <div className="card-actions justify-end">
+        <div className="card-actions">
           <div className="badge badge-info">
-            {capitalizeFirstLetter(user.role)}
+            {capitalizeFirstLetter(user.room)}
           </div>
         </div>
       </div>

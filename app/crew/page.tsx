@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { ProfileCard } from "@/app/components/ProfileCard";
 import PageWrapper from "../components/PageWrapper";
+import CustomIcon from "../components/CustomIcon";
 
 async function CrewPage() {
   const cookieStore = cookies();
@@ -20,7 +21,15 @@ async function CrewPage() {
     .like("role", "kadra");
 
   return (
-    <PageWrapper title="Kadra" isReturn>
+    <PageWrapper
+      title={
+        <>
+          <CustomIcon name="crewModuleIcon" className="mr-2" />
+          Kadra
+        </>
+      }
+      isReturn
+    >
       <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5">
         {user && user?.map((user) => <ProfileCard user={user} key={user.id} />)}
       </main>
