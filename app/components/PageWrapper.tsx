@@ -13,10 +13,11 @@ export default function PageWrapper({
   hasSidebar,
 }: {
   children: React.ReactNode;
-  title: string;
+  title: string | React.ReactNode;
   hasSidebar?: boolean;
 }) {
   const [module, setModule] = useState<any[] | null>();
+
   useEffect(() => {
     async function checkAuthAndFetchData() {
       const supabase = createClient();
@@ -41,7 +42,7 @@ export default function PageWrapper({
       <div className="drawer-content flex flex-col">
         <div className="container mx-auto flex min-h-screen flex-col items-center">
           {/* Navbar */}
-          <div className="w-full navbar bg-background border-b border-b-foreground/10 h-12">
+          <div className="w-full fixed left-0 top-0 navbar bg-background border-b border-b-foreground/10 h-12 z-20">
             {hasSidebar && (
               <div className="flex-none lg:hidden">
                 <label
@@ -57,12 +58,12 @@ export default function PageWrapper({
               {title}
             </header>
           </div>
-          <div className="px-4 sm:px-10 md:px-20 lg:px-24 w-full flex flex-1 mt-4 mb-12">
+          <div className="px-4 sm:px-10 md:px-20 lg:px-24 w-full flex flex-1 mt-24 mb-12">
             {children}
           </div>
         </div>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-30">
         <label
           htmlFor="my-drawer-3"
           aria-label="close sidebar"

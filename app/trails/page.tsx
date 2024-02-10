@@ -6,6 +6,7 @@ import { HiExternalLink } from "react-icons/hi";
 import { createClient } from "@/utils/supabase/server";
 
 import PageWrapper from "../components/PageWrapper";
+import CustomIcon from "../components/CustomIcon";
 
 async function TrailsPage() {
   const cookieStore = cookies();
@@ -17,7 +18,15 @@ async function TrailsPage() {
   }
 
   return (
-    <PageWrapper title="Trasy" hasSidebar>
+    <PageWrapper
+      title={
+        <>
+          <CustomIcon name="crewModuleIcon" className="mr-2" />
+          Trasy
+        </>
+      }
+      hasSidebar
+    >
       <main className="animate-in w-full flex justify-center">
         <div className="card bg-base-100 shadow-xl">
           <figure>

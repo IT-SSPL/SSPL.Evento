@@ -5,12 +5,14 @@ import { createClient } from "@/utils/supabase/client";
 import PageWrapper from "../components/PageWrapper";
 import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import CustomIcon from "../components/CustomIcon";
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
   const [isCrew, setIsCrew] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
+  const messagesContainerRef = useRef(null);
 
   const supabase = createClient();
 
@@ -56,6 +58,19 @@ function InfoPage() {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    if (allMessages) {
+      scrollToBottom();
+    }
+  }, [allMessages]);
+
+  const scrollToBottom = () => {
+    if (!messagesContainerRef.current) return;
+    (messagesContainerRef.current as HTMLElement).scrollIntoView({
+      block: "end",
+    });
+  };
+
   async function handleSendMessage(formData: FormData) {
     const message = formData.get("message");
 
@@ -64,8 +79,20 @@ function InfoPage() {
   }
 
   return (
-    <PageWrapper title="Informacje" hasSidebar>
-      <main className="animate-in flex-1 w-full mb-12" id="messageContainer">
+    <PageWrapper
+      title={
+        <>
+          <CustomIcon name="infoModuleIcon" className="mr-2" />
+          Informacje
+        </>
+      }
+      hasSidebar
+    >
+      <main
+        className="animate-in flex-1 w-full mb-12"
+        id="messageContainer"
+        ref={messagesContainerRef}
+      >
         {allMessages &&
           allMessages?.map((message: MessageType) => (
             <InfoMessage

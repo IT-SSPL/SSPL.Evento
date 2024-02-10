@@ -55,7 +55,7 @@ export default function LoginCodePage({
       <form className="w-full max-w-xs" action={validateCode}>
         <label className="label">Code</label>
 
-        <div className="">
+        <div>
           <CodeInputContainer />
         </div>
         <div className="divider"></div>

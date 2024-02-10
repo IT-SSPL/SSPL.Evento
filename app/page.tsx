@@ -5,21 +5,11 @@ import { createClient } from "@/utils/supabase/server";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import AuthButton from "./components/AuthButton";
 import PageWrapper from "./components/PageWrapper";
+import CustomIcon from "./components/CustomIcon";
 
 export default async function IndexPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient(cookieStore);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
 
   const {
     data: { user },
@@ -30,8 +20,6 @@ export default async function IndexPage() {
     redirect("/login");
   }
 
-  // const isSupabaseConnected = canInitSupabaseClient();
-
   let { data: module } = await supabase
     .from("module")
     .select("*")
@@ -39,14 +27,18 @@ export default async function IndexPage() {
 
   return (
     <PageWrapper title="TripApp">
-      <div className="animate-in flex-1 flex flex-col w-full items-center justify-center">
-        <main className="flex-1 flex flex-col gap-4 w-full justify-center">
-          <h1 className="font-bold text-3xl">Cześć 👋</h1>
-          <ul className="menu rounded-box">
+      <div className="animate-in flex-1 flex flex-col w-full items-center">
+        <main className="flex-1 flex flex-col gap-4 w-full">
+          <h1 className="font-bold text-3xl text-center">Cześć 👋</h1>
+          <ul className="menu rounded-box text-center">
             {module &&
               module?.map((e, i) => (
                 <li key={i} className="border-b">
-                  <Link href={e.path} className="btn-ghost text-lg py-4">
+                  <Link
+                    href={e.path}
+                    className="btn-ghost text-lg py-4 w-full flex justify-center"
+                  >
+                    {<CustomIcon name={`${e.path}ModuleIcon`} />}
                     {capitalizeFirstLetter(e.name)}
                   </Link>
                 </li>
