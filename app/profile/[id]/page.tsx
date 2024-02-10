@@ -1,8 +1,8 @@
-import Header from "@/app/components/Header";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import Link from "next/link";
 import React from "react";
+import { cookies } from "next/headers";
+
+import PageWrapper from "@/app/components/PageWrapper";
+import { createClient } from "@/utils/supabase/server";
 
 const ProfilePage = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies();
@@ -22,9 +22,7 @@ const ProfilePage = async ({ params }: { params: { id: string } }) => {
   const userData = user[0];
 
   return (
-    <div className="container mx-auto flex h-screen flex-col items-center">
-      <Header title={`Profil użytkownika`} isReturn />
-
+    <PageWrapper title={`Profil użytkownika`} isReturn>
       <main className="animate-in flex-1 flex flex-col w-full">
         <div className="join pt-4 pb-6">
           <div className="avatar join-item">
@@ -71,7 +69,7 @@ const ProfilePage = async ({ params }: { params: { id: string } }) => {
           )}
         </div>
       </main>
-    </div>
+    </PageWrapper>
   );
 };
 

@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import Header from "../components/Header";
+import PageWrapper from "../components/PageWrapper";
 
 async function InfoPage() {
   const cookieStore = cookies();
@@ -14,10 +14,9 @@ async function InfoPage() {
   }
 
   return (
-    <>
-      <Header title="Informacje" isReturn />
+    <PageWrapper title="Informacje" isReturn>
       <p>Informacje | {data.user.email}</p>;
-    </>
+    </PageWrapper>
   );
 }
 

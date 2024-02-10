@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import Header from "../components/Header";
+import PageWrapper from "../components/PageWrapper";
 
 async function TrailsPage() {
   const cookieStore = cookies();
@@ -14,10 +14,9 @@ async function TrailsPage() {
   }
 
   return (
-    <>
-      <Header title="Trasy" isReturn />
+    <PageWrapper title="Trasy" isReturn>
       <p>Trasy | {data.user.email}</p>;
-    </>
+    </PageWrapper>
   );
 }
 

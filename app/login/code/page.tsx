@@ -64,6 +64,7 @@ export default function LoginCodePage({
         </div>
       </form>
       {searchParams?.message && (
+        //TODO: Change to ReactIcon
         <p className="alert absolute bottom-4 w-full max-w-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"

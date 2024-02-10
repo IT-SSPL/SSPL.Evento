@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import PageWrapper from "../components/PageWrapper";
 
 export default function LoginLayout({
   children,
@@ -6,9 +6,7 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header title="TripApp" />
-
+    <PageWrapper title="TripApp">
       <main className="animate-in flex-1 flex flex-col items-center justify-center relative">
         {children}
       </main>
@@ -26,6 +24,6 @@ export default function LoginLayout({
           </a>
         </p>
       </footer>
-    </div>
+    </PageWrapper>
   );
 }

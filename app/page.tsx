@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import Header from "./components/Header";
+import PageWrapper from "./components/PageWrapper";
 
 export default async function IndexPage() {
   const cookieStore = cookies();
@@ -38,10 +38,9 @@ export default async function IndexPage() {
     .is("isVisible", true);
 
   return (
-    <div className="container mx-auto flex h-screen flex-col items-center">
-      <Header title="TripApp" />
-
-      <div className="animate-in flex-1 flex flex-col w-full">
+    <PageWrapper title="TripApp">
+      {/*//TODO: dangerous code, fix it!*/}
+      <div className="animate-in flex-1 flex flex-col w-full h-[calc(100vh-(6rem+1px))] ">
         <main className="flex-1 flex flex-col gap-4 w-full justify-center">
           <h1 className="font-bold text-3xl">Cześć 👋</h1>
           <div className="max-h-[60vh] overflow-y-scroll">
@@ -59,7 +58,6 @@ export default async function IndexPage() {
         </main>
         <AuthButton /> {/* //TODO: dorobić przycisk do wylogowania */}
       </div>
-
       <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs">
         <p>
           Powered by{" "}
@@ -73,6 +71,6 @@ export default async function IndexPage() {
           </a>
         </p>
       </footer>
-    </div>
+    </PageWrapper>
   );
 }

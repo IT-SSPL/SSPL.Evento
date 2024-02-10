@@ -44,7 +44,7 @@ export default async function RootLayout({
   return (
     <html lang="pl" className={GeistSans.className}>
       <body className="bg-background text-foreground min-h-screen">
-        <div className="mx-4 sm:mx-10 md:mx-20 lg:mx-24">{children}</div>
+        {children}
       </body>
     </html>
   );
