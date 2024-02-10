@@ -16,7 +16,7 @@ export default async function PageWrapperServer({
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data } = await supabase.auth.getUser();
+  const { data: userAuth } = await supabase.auth.getUser();
 
   let { data: module } = await supabase
     .from("module")
@@ -26,7 +26,7 @@ export default async function PageWrapperServer({
   let { data: user } = await supabase
     .from("user")
     .select("*")
-    .eq("id", data.user!.id);
+    .eq("id", userAuth.user?.id);
 
   const userData = user && user[0];
 

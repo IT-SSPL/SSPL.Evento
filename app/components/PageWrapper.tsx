@@ -72,11 +72,11 @@ export default function PageWrapper({
             ))}
           {userData && (
             <li className="fixed bottom-6 left-0 w-full">
-              <Link
-                href={`profile/${userData.id}`}
-                className="flex justify-between items-center"
-              >
-                <div className="flex items-center">
+              <div className="flex justify-between items-center">
+                <Link
+                  href={`profile/${userData.id}`}
+                  className="flex items-center"
+                >
                   <div className="avatar">
                     <div className="w-10 rounded-xl">
                       <Image
@@ -95,12 +95,12 @@ export default function PageWrapper({
                   <div className="ml-2 text-lg">
                     {emptyIfNull(userData.name)}
                   </div>
-                </div>
+                </Link>
 
                 <form action={signOut}>
                   <button className="btn btn-info btn-sm">Logout</button>
                 </form>
-              </Link>
+              </div>
             </li>
           )}
         </ul>
