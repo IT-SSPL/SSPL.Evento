@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 import { IoMdRefresh } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 
-export const notNull = (value: string | null) => {
+const notNull = (value: string | null) => {
   return value !== null ? value : "";
 };
 
