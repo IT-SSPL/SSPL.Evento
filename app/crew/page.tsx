@@ -14,6 +14,8 @@ async function CrewPage() {
     redirect("/");
   }
 
+  console.log();
+
   let { data: user } = await supabase
     .from("user")
     .select("*")

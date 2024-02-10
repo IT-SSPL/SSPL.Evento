@@ -3,23 +3,71 @@ import { cookies } from "next/headers";
 
 import PageWrapper from "@/app/components/PageWrapper";
 import { createClient } from "@/utils/supabase/server";
+import Image from "next/image";
+import { ProfileInfo } from "./ProfileInfo";
+import { ProfileEdit } from "./ProfileEdit";
+import { IUser } from "@/app/types/types";
+import { redirect } from "next/navigation";
+import { IoMdRefresh } from "react-icons/io";
 
-const ProfilePage = async ({ params }: { params: { id: string } }) => {
+export const notNull = (value: string | null) => {
+  return value !== null ? value : "";
+};
+
+const ProfilePage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { message: string };
+}) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { id } = params;
 
-  let { data: user } = await supabase.from("user").select("*").eq("id", id);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!user) {
-    return <div>User not found</div>;
+  let { data: userProfile } = await supabase
+    .from("user")
+    .select("*")
+    .eq("id", id);
+
+  if (!userProfile) {
+    return <div>Brak profilu</div>;
   }
 
-  const notNull = (value: string | null) => {
-    return value !== null ? value : "";
-  };
+  const userData = userProfile[0] as IUser;
+  const isYourProfile = user?.id === userData.id;
 
-  const userData = user[0];
+  const updateProfileInfo = async (formData: FormData) => {
+    "use server";
+
+    const name = formData.get("name") as string;
+    const surname = formData.get("surname") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const description = formData.get("description") as string;
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const { error } = await supabase
+      .from("user")
+      .update({
+        name,
+        surname,
+        email,
+        phone,
+        description,
+      })
+      .eq("id", userData.id);
+
+    if (error) {
+      return redirect(`/profile/${id}?message=Try again later`);
+    }
+    return redirect(`/profile/${id}`);
+  };
 
   return (
     <PageWrapper title={`Profil użytkownika`} isReturn>
@@ -27,7 +75,17 @@ const ProfilePage = async ({ params }: { params: { id: string } }) => {
         <div className="join pt-4 pb-6">
           <div className="avatar join-item">
             <div className="w-40 rounded-xl">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <Image
+                width={400}
+                height={400}
+                src={`${
+                  process.env.NEXT_PUBLIC_SUPABASE_URL as string
+                }/storage/v1/object/public/profile-icons/${
+                  userData.image_path
+                }`}
+                alt="Shoes"
+                className="w-full"
+              />
             </div>
           </div>
           <div className="join-item flex items-center p-4">
@@ -36,38 +94,19 @@ const ProfilePage = async ({ params }: { params: { id: string } }) => {
             </h1>
           </div>
         </div>
-        <div className="">
-          {userData.email && (
-            <>
-              <a
-                className="join-item flex items-baseline"
-                href={`mailto:${userData.email}`}
-              >
-                <p className="font-bold text-lg">Email:</p>
-                <p className="ml-2">{userData.email}</p>
-              </a>
-              <div className="divider m-0.5" />
-            </>
-          )}
-          {userData.phone && (
-            <>
-              <a
-                className="join-item flex items-baseline"
-                href={`tel:+48${userData.phone}`}
-              >
-                <p className="font-bold text-lg">Telefon:</p>
-                <a className="ml-2">{userData.phone}</a>
-              </a>
-              <div className="divider m-0.5" />
-            </>
-          )}
-          {userData.description && (
-            <div className="join-item flex items-baseline">
-              <p className="font-bold text-lg">Opis:</p>
-              <p className="ml-2">{userData.description}</p>
-            </div>
-          )}
-        </div>
+        {isYourProfile ? (
+          <form action={updateProfileInfo}>
+            <ProfileEdit user={userData} />
+          </form>
+        ) : (
+          <ProfileInfo user={userData} />
+        )}
+        {searchParams?.message && (
+          <p className="alert bottom-4 w-full max-w-sm">
+            <IoMdRefresh className="text-3xl" />
+            {searchParams.message}
+          </p>
+        )}
       </main>
     </PageWrapper>
   );

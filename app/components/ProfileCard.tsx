@@ -1,16 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-
-interface IUser {
-  id: string;
-  name: string;
-  surname: string;
-  role: string;
-  email: string;
-  description: string;
-  phone: string;
-}
+import { IUser } from "../types/types";
 
 export const ProfileCard = ({ user }: { user: IUser }) => {
   return (
@@ -22,7 +13,9 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
         <Image
           width={400}
           height={400}
-          src="/image/"
+          src={`${
+            process.env.NEXT_PUBLIC_SUPABASE_URL as string
+          }/storage/v1/object/public/profile-icons/${user.image_path}`}
           alt="Shoes"
           className="w-full"
         />
@@ -30,12 +23,12 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
       <div className="card-body">
         <h2 className="card-title">
           {user.name} {user.surname}
+        </h2>
+        <div className="card-actions justify-end">
           <div className="badge badge-info">
             {capitalizeFirstLetter(user.role)}
           </div>
-        </h2>
-        <p>cos</p>
-        <div className="card-actions justify-end"></div>
+        </div>
       </div>
     </Link>
   );

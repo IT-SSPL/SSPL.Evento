@@ -1,6 +1,8 @@
+"use client";
+
 import { MessageType } from "./info.types";
 
-export const Message = ({ message, created_at }: MessageType) => {
+export const InfoMessage = ({ message, created_at }: MessageType) => {
   return (
     <div className="chat chat-start">
       <div className="chat-image avatar">
