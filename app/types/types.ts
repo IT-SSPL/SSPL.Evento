@@ -9,3 +9,8 @@ export interface IUser {
   image_path: string;
   room: string;
 }
+
+export interface IModule {
+  name: string;
+  path: string;
+}

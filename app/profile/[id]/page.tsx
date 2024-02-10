@@ -1,7 +1,7 @@
 import React from "react";
 import { cookies } from "next/headers";
 
-import PageWrapper from "@/app/components/PageWrapper";
+import PageWrapperServer from "@/app/components/PageWrapperServer";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { ProfileInfo } from "./ProfileInfo";
@@ -10,10 +10,7 @@ import { IUser } from "@/app/types/types";
 import { redirect } from "next/navigation";
 import { IoMdRefresh } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
-
-const notNull = (value: string | null) => {
-  return value !== null ? value : "";
-};
+import { emptyIfNull } from "@/utils/emptyIfNull";
 
 const ProfilePage = async ({
   params,
@@ -98,7 +95,7 @@ const ProfilePage = async ({
   };
 
   return (
-    <PageWrapper title={`Profil użytkownika`} hasSidebar>
+    <PageWrapperServer title={`Profil użytkownika`} hasSidebar>
       <main className="animate-in flex-1 flex flex-col w-full">
         <div className="join pb-6">
           <div className="avatar join-item">
@@ -111,14 +108,14 @@ const ProfilePage = async ({
                 }/storage/v1/object/public/profile-icons/${
                   userData.image_path
                 }`}
-                alt="Shoes"
+                alt="User profile picture"
                 className="w-full"
               />
             </div>
           </div>
           <div className="join-item flex items-center p-4">
             <h1 className="font-bold text-2xl">
-              {notNull(userData.name)} {notNull(userData.surname)}
+              {emptyIfNull(userData.name)} {emptyIfNull(userData.surname)}
             </h1>
           </div>
         </div>
@@ -136,7 +133,7 @@ const ProfilePage = async ({
           </p>
         )}
       </main>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 };
 

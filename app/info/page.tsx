@@ -1,12 +1,12 @@
 "use client";
 
 import { redirect } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import PageWrapper from "../components/PageWrapper";
 import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
-import { useEffect, useRef, useState } from "react";
 import CustomIcon from "../components/CustomIcon";
+import PageWrapperClient from "../components/PageWrapperClient";
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
@@ -79,7 +79,7 @@ function InfoPage() {
   }
 
   return (
-    <PageWrapper
+    <PageWrapperClient
       title={
         <>
           <CustomIcon name="infoModuleIcon" className="mr-2" />
@@ -125,7 +125,7 @@ function InfoPage() {
           </div>
         </form>
       )}
-    </PageWrapper>
+    </PageWrapperClient>
   );
 }
 

@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+
 import { createClient } from "@/utils/supabase/server";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import AuthButton from "./components/AuthButton";
-import PageWrapper from "./components/PageWrapper";
+import PageWrapperServer from "./components/PageWrapperServer";
 import CustomIcon from "./components/CustomIcon";
 
 export default async function IndexPage() {
@@ -26,7 +26,7 @@ export default async function IndexPage() {
     .is("isVisible", true);
 
   return (
-    <PageWrapper title="TripApp">
+    <PageWrapperServer title="TripApp" hasSidebar>
       <div className="animate-in flex-1 flex flex-col w-full items-center">
         <main className="flex-1 flex flex-col gap-4 w-full">
           <h1 className="font-bold text-3xl text-center">Cześć 👋</h1>
@@ -45,8 +45,6 @@ export default async function IndexPage() {
               ))}
           </ul>
         </main>
-        <AuthButton />
-        {/* //TODO: przenieść przycisk do wylogowania do side menu */}
       </div>
       <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs fixed bottom-0 bg-background left-0 max-h-12">
         <p>
@@ -57,10 +55,10 @@ export default async function IndexPage() {
             className="font-bold hover:underline"
             rel="noreferrer"
           >
-            Komisja ds. IT SSPŁ
+            MW & KS (Komisja ds. IT SSPŁ)
           </a>
         </p>
       </footer>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 }

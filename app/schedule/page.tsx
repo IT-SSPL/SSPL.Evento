@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import PageWrapper from "../components/PageWrapper";
+import PageWrapperServer from "../components/PageWrapperServer";
 import CustomIcon from "../components/CustomIcon";
 
 async function SchedulePage() {
@@ -19,7 +19,7 @@ async function SchedulePage() {
   let { data: scheduleEntries } = await supabase.from("schedules").select("*");
 
   return (
-    <PageWrapper
+    <PageWrapperServer
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
@@ -45,9 +45,9 @@ async function SchedulePage() {
                     scheduleEntries
                       .filter((entry) => entry.day === day.display_name)
                       .map((entry) => (
-                        <div className="flex justify-between">
-                          <p>{entry.time}</p>
-                          <p>{entry.name}</p>
+                        <div className="grid grid-cols-2 items-baseline">
+                          <p className="font-bold">{entry.time}</p>
+                          <p className="text-end text-sm">{entry.name}</p>
                         </div>
                       ))}
                 </div>
@@ -55,7 +55,7 @@ async function SchedulePage() {
             </div>
           ))}
       </main>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 }
 

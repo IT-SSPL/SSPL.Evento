@@ -1,4 +1,4 @@
-import PageWrapper from "../components/PageWrapper";
+import PageWrapperServer from "../components/PageWrapperServer";
 
 export default function LoginLayout({
   children,
@@ -6,7 +6,7 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <PageWrapper title="TripApp">
+    <PageWrapperServer title="TripApp">
       <main className="animate-in flex-1 flex flex-col items-center justify-center relative">
         {children}
       </main>
@@ -20,10 +20,10 @@ export default function LoginLayout({
             className="font-bold hover:underline"
             rel="noreferrer"
           >
-            Komisja ds. IT SSPŁ
+            MW & KS (Komisja ds. IT SSPŁ)
           </a>
         </p>
       </footer>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 }

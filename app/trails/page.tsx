@@ -5,7 +5,7 @@ import { HiExternalLink } from "react-icons/hi";
 
 import { createClient } from "@/utils/supabase/server";
 
-import PageWrapper from "../components/PageWrapper";
+import PageWrapperServer from "../components/PageWrapperServer";
 import CustomIcon from "../components/CustomIcon";
 
 async function TrailsPage() {
@@ -18,7 +18,7 @@ async function TrailsPage() {
   }
 
   return (
-    <PageWrapper
+    <PageWrapperServer
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
@@ -46,7 +46,7 @@ async function TrailsPage() {
           </div>
         </div>
       </main>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 }
 

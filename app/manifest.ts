@@ -3,8 +3,9 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ZimowiskApp",
-    short_name: "zimowiskapp",
+    short_name: "ZimowiskApp",
     description: "Aplikacja dla uczestników zimowiska",
+    lang: "pl",
     icons: [
       {
         src: "/icons/android-chrome-192x192.png",

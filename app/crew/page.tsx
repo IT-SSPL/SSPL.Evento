@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 import { ProfileCard } from "@/app/components/ProfileCard";
-import PageWrapper from "../components/PageWrapper";
+import PageWrapperServer from "../components/PageWrapperServer";
 import CustomIcon from "../components/CustomIcon";
 
 async function CrewPage() {
@@ -21,7 +21,7 @@ async function CrewPage() {
     .like("role", "kadra");
 
   return (
-    <PageWrapper
+    <PageWrapperServer
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
@@ -33,7 +33,7 @@ async function CrewPage() {
       <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5">
         {user && user?.map((user) => <ProfileCard user={user} key={user.id} />)}
       </main>
-    </PageWrapper>
+    </PageWrapperServer>
   );
 }
 

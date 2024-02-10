@@ -9,6 +9,7 @@ import { GiSpy } from "react-icons/gi";
 import { LuCalendarHeart } from "react-icons/lu";
 import { GiRobe } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
+import { HiOutlineDocumentText } from "react-icons/hi";
 
 type IconProps = {
   name: string;
@@ -23,6 +24,7 @@ const CustomIcon = (props: IconProps) => {
     scheduleModuleIcon: <GrSchedule {...svgProps} />,
     crewModuleIcon: <FaPeopleGroup {...svgProps} />,
     trailsModuleIcon: <GiTrail {...svgProps} />,
+    filesModuleIcon: <HiOutlineDocumentText {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,
     MonDayIcon: <GiMicrophone {...svgProps} />,
     TueDayIcon: <GiSpy {...svgProps} />,
