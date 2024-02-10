@@ -93,7 +93,7 @@ export default function PageWrapper({
                     </div>
                   </div>
                   <div className="ml-2 text-lg">
-                    {emptyIfNull(userData.name)}
+                    {userData.name !== null ? emptyIfNull(userData.name) : ""}
                   </div>
                 </Link>
 

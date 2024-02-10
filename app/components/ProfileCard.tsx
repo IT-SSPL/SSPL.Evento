@@ -29,7 +29,7 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
         <div className="card-actions">
           <div className="badge badge-info flex items-center">
             <LuKeySquare className="mr-2" />
-            {capitalizeFirstLetter(user.room)}
+            {user.room !== null ? capitalizeFirstLetter(user.room) : ""}
           </div>
         </div>
       </div>
