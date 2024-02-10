@@ -21,10 +21,7 @@ export default function PageWrapperClient({
   useEffect(() => {
     async function checkAuthAndFetchData() {
       const supabase = createClient();
-      const { data, error } = await supabase.auth.getUser();
-      if (error || !data?.user) {
-        redirect("/");
-      }
+      const { data } = await supabase.auth.getUser();
 
       let { data: module } = await supabase
         .from("module")
@@ -34,7 +31,7 @@ export default function PageWrapperClient({
       let { data: user } = await supabase
         .from("user")
         .select("*")
-        .eq("id", data.user.id);
+        .eq("id", data.user!.id);
 
       setModule(module as IModule[]);
       if (user) {

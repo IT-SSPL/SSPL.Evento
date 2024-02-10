@@ -16,10 +16,7 @@ export default async function PageWrapperServer({
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/");
-  }
+  const { data } = await supabase.auth.getUser();
 
   let { data: module } = await supabase
     .from("module")
@@ -29,7 +26,7 @@ export default async function PageWrapperServer({
   let { data: user } = await supabase
     .from("user")
     .select("*")
-    .eq("id", data.user.id);
+    .eq("id", data.user!.id);
 
   const userData = user && user[0];
 
