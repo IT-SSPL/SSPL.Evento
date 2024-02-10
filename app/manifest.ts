@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ZimowiskApp",
     short_name: "ZimowiskApp",
-    description: "Aplikacja dla uczestników zimowiska",
+    description: "Aplikacja dla uczestników Zimowiska SSPŁ 2024",
     lang: "pl",
     icons: [
       {
@@ -32,8 +32,8 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "maskable",
       },
     ],
-    theme_color: "#fff",
-    background_color: "#fff",
+    theme_color: "#F9FAFB",
+    background_color: "#F9FAFB",
     display: "standalone",
     scope: "/",
     start_url: "/",
