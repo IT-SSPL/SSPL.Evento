@@ -21,7 +21,7 @@ async function CrewPage() {
 
   return (
     <PageWrapper title="Kadra" isReturn>
-      <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5 mt-6 mb-10">
+      <main className="animate-in flex-1 w-full grid grid-cols-2 gap-5">
         {user && user?.map((user) => <ProfileCard user={user} key={user.id} />)}
       </main>
     </PageWrapper>

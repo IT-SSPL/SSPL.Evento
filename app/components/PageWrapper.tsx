@@ -23,7 +23,9 @@ export default function PageWrapper({
         )}
         <h1 className="font-bold text-xl dark:text-white">{title}</h1>
       </header>
-      <div className="px-4 sm:px-10 md:px-20 lg:px-24 w-full">{children}</div>
+      <div className="px-4 sm:px-10 md:px-20 lg:px-24 w-full flex flex-1 mt-8 mb-12">
+        {children}
+      </div>
     </div>
   );
 }

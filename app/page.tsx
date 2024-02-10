@@ -1,9 +1,9 @@
-import AuthButton from "./components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import AuthButton from "./components/AuthButton";
 import PageWrapper from "./components/PageWrapper";
 
 export default async function IndexPage() {
@@ -30,7 +30,7 @@ export default async function IndexPage() {
     redirect("/login");
   }
 
-  const isSupabaseConnected = canInitSupabaseClient();
+  // const isSupabaseConnected = canInitSupabaseClient();
 
   let { data: module } = await supabase
     .from("module")
@@ -39,26 +39,24 @@ export default async function IndexPage() {
 
   return (
     <PageWrapper title="TripApp">
-      {/*//TODO: dangerous code, fix it!*/}
-      <div className="animate-in flex-1 flex flex-col w-full h-[calc(100vh-(6rem+1px))] ">
+      <div className="animate-in flex-1 flex flex-col w-full items-center justify-center">
         <main className="flex-1 flex flex-col gap-4 w-full justify-center">
           <h1 className="font-bold text-3xl">Cześć 👋</h1>
-          <div className="max-h-[60vh] overflow-y-scroll">
-            <ul className="menu rounded-box">
-              {module &&
-                module?.map((e, i) => (
-                  <li key={i} className="border-b">
-                    <Link href={e.path} className="btn-ghost text-lg py-4">
-                      {capitalizeFirstLetter(e.name)}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
+          <ul className="menu rounded-box">
+            {module &&
+              module?.map((e, i) => (
+                <li key={i} className="border-b">
+                  <Link href={e.path} className="btn-ghost text-lg py-4">
+                    {capitalizeFirstLetter(e.name)}
+                  </Link>
+                </li>
+              ))}
+          </ul>
         </main>
-        <AuthButton /> {/* //TODO: dorobić przycisk do wylogowania */}
+        <AuthButton />{" "}
+        {/* //TODO: przenieść przycisk do wylogowania do side menu */}
       </div>
-      <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs">
+      <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs fixed bottom-0 bg-background left-0 max-h-12">
         <p>
           Powered by{" "}
           <a
