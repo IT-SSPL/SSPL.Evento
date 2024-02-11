@@ -77,7 +77,7 @@ export default function PageWrapper({
             <li className="fixed bottom-6 left-0 w-full">
               <div className="flex justify-between items-center">
                 <Link
-                  href={`profile/${userData.id}`}
+                  href={`/profile/${userData.id}`}
                   className="flex items-center"
                 >
                   <div className="avatar">
