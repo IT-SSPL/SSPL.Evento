@@ -5,6 +5,7 @@ import { IoIosMenu } from "react-icons/io";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { emptyIfNull } from "@/utils/emptyIfNull";
 import { IModule, IUser } from "../types/types";
+import CustomIcon from "./CustomIcon";
 
 export default function PageWrapper({
   children,
@@ -59,6 +60,7 @@ export default function PageWrapper({
           {/* Sidebar content here */}
           <li className="border-b">
             <Link href="/" className="btn-ghost text-lg py-4">
+              <CustomIcon name="MainPageIcon" className="mr-2" />
               Strona główna
             </Link>
           </li>
@@ -66,6 +68,7 @@ export default function PageWrapper({
             module?.map((e, i) => (
               <li key={i} className="border-b">
                 <Link href={e.path} className="btn-ghost text-lg py-4">
+                  {<CustomIcon name={`${e.path}ModuleIcon`} />}
                   {capitalizeFirstLetter(e.name)}
                 </Link>
               </li>

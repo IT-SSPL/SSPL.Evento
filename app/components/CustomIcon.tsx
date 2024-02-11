@@ -10,6 +10,7 @@ import { LuCalendarHeart } from "react-icons/lu";
 import { GiRobe } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 import { HiOutlineDocumentText } from "react-icons/hi";
+import { FaRegSnowflake } from "react-icons/fa";
 
 type IconProps = {
   name: string;
@@ -31,6 +32,7 @@ const CustomIcon = (props: IconProps) => {
     WedDayIcon: <LuCalendarHeart {...svgProps} />,
     ThuDayIcon: <GiRobe {...svgProps} />,
     FriDayIcon: <FaHome {...svgProps} />,
+    MainPageIcon: <FaRegSnowflake {...svgProps} />,
   };
 
   return Icons[name];

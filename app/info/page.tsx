@@ -10,7 +10,7 @@ import PageWrapperClient from "../components/PageWrapperClient";
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
-  const [isCrew, setIsCrew] = useState<boolean>(false);
+  const [canSendMessages, setCanSendMessages] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
   const messagesContainerRef = useRef(null);
 
@@ -36,9 +36,9 @@ function InfoPage() {
         .select("role")
         .eq("id", data.user.id);
 
-      userRole && userRole[0].role === "kadra"
-        ? setIsCrew(true)
-        : setIsCrew(false);
+      userRole && (userRole[0].role === "kadra" || userRole[0].role === "IT")
+        ? setCanSendMessages(true)
+        : setCanSendMessages(false);
 
       let { data: messages } = await supabase.from("messages").select("*");
       setAllMessages(messages as MessageType[]);
@@ -103,7 +103,7 @@ function InfoPage() {
             />
           ))}
       </main>
-      {isCrew && (
+      {canSendMessages && (
         <form
           action={handleSendMessage}
           className="w-full fixed bottom-0 left-0 flex justify-center px-6 pb-5 pt-3 border-t border-t-foreground/10 bg-background"
