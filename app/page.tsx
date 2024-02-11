@@ -35,7 +35,7 @@ export default async function IndexPage() {
               module?.map((e, i) => (
                 <li key={i} className="border-b">
                   <Link
-                    href={e.path}
+                    href={`/${e.path}`}
                     className="btn-ghost text-lg py-4 w-full flex justify-center"
                   >
                     {<CustomIcon name={`${e.path}ModuleIcon`} />}

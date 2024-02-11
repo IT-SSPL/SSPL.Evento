@@ -1,15 +1,15 @@
 import React from "react";
 import { cookies } from "next/headers";
-
-import PageWrapperServer from "@/app/components/PageWrapperServer";
-import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
-import { ProfileInfo } from "./ProfileInfo";
-import { ProfileEdit } from "./ProfileEdit";
-import { IUser } from "@/app/types/types";
 import { redirect } from "next/navigation";
 import { IoMdRefresh } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
+
+import PageWrapperServer from "@/app/components/PageWrapperServer";
+import { createClient } from "@/utils/supabase/server";
+import { ProfileInfo } from "./ProfileInfo";
+import { ProfileEdit } from "./ProfileEdit";
+import { IUser } from "@/app/types/types";
 import { emptyIfNull } from "@/utils/emptyIfNull";
 
 const ProfilePage = async ({
@@ -37,7 +37,11 @@ const ProfilePage = async ({
     .eq("id", id);
 
   if (!userProfile) {
-    return <div>Brak profilu</div>;
+    return (
+      <div className="animate-in flex-1 grid w-full min-h-screen place-content-center">
+        Brak profilu
+      </div>
+    );
   }
 
   const userData = userProfile[0] as IUser;
@@ -73,28 +77,43 @@ const ProfilePage = async ({
             cacheControl: "3600",
             contentType: "image/webp",
           });
+
+        await supabase
+          .from("user")
+          .update({
+            name,
+            surname,
+            phone,
+            description,
+            room,
+            image_path: data?.path,
+          })
+          .eq("id", userData.id);
+
+        return redirect(`/profile/${id}`);
       } catch (error) {
-        return redirect(`/profile/${id}?message=Error while uploading image`);
+        return redirect(
+          `/profile/${id}?message=Error while uploading image (max size: 10 MB)`
+        );
       }
-    }
+    } else {
+      // update profile data to database
+      const { error } = await supabase
+        .from("user")
+        .update({
+          name,
+          surname,
+          phone,
+          description,
+          room,
+        })
+        .eq("id", userData.id);
 
-    // update profile data to database
-    const { error } = await supabase
-      .from("user")
-      .update({
-        name,
-        surname,
-        phone,
-        description,
-        room,
-        image_path,
-      })
-      .eq("id", userData.id);
-
-    if (error) {
-      return redirect(`/profile/${id}?message=Try again later`);
+      if (error) {
+        return redirect(`/profile/${id}?message=Try again later`);
+      }
+      return redirect(`/profile/${id}`);
     }
-    return redirect(`/profile/${id}`);
   };
 
   return (
@@ -130,7 +149,7 @@ const ProfilePage = async ({
           <ProfileInfo user={userData} />
         )}
         {searchParams?.message && (
-          <p className="alert bottom-4 w-full max-w-sm">
+          <p className="alert bottom-4 w-full max-w-sm self-center">
             <IoMdRefresh className="text-3xl" />
             {searchParams.message}
           </p>

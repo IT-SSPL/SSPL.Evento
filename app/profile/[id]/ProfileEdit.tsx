@@ -81,9 +81,8 @@ export const ProfileEdit = ({ user }: { user: IUser }) => {
           className="ml-2 textarea textarea-ghost w-full"
           rows={4}
           name="description"
-        >
-          {user.description}
-        </textarea>
+          defaultValue={user.description}
+        ></textarea>
       </div>
 
       <div className="form-control my-8">

@@ -67,7 +67,7 @@ export default function PageWrapper({
           {module &&
             module?.map((e, i) => (
               <li key={i} className="border-b">
-                <Link href={e.path} className="btn-ghost text-lg py-4">
+                <Link href={`/${e.path}`} className="btn-ghost text-lg py-4">
                   {<CustomIcon name={`${e.path}ModuleIcon`} />}
                   {capitalizeFirstLetter(e.name)}
                 </Link>
