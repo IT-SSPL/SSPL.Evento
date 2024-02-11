@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { LuKeySquare } from "react-icons/lu";
 
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { IUser } from "../types/types";
 
 export const ProfileCard = ({ user }: { user: IUser }) => {
@@ -18,7 +18,7 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
           src={`${
             process.env.NEXT_PUBLIC_SUPABASE_URL as string
           }/storage/v1/object/public/profile-icons/${user.image_path}`}
-          alt="Shoes"
+          alt="Profile picture"
           className="w-full"
         />
       </figure>

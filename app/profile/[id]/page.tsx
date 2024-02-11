@@ -56,6 +56,9 @@ const ProfilePage = async ({
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
+    // TODO: Compress images before uploading
+    // TODO: Fix - update only changed fields
+
     // update profile image
     const array_buffer = await image.arrayBuffer();
     const image_path = image

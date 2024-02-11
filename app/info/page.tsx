@@ -8,6 +8,8 @@ import { MessageType } from "./info.types";
 import CustomIcon from "../components/CustomIcon";
 import PageWrapperClient from "../components/PageWrapperClient";
 
+//TODO: Add push notification (FIREBASE CLOUD MESSAGING, OneSignal or other)
+
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
   const [canSendMessages, setCanSendMessages] = useState<boolean>(false);
@@ -43,6 +45,7 @@ function InfoPage() {
       let { data: messages } = await supabase.from("messages").select("*");
       setAllMessages(messages as MessageType[]);
 
+      // TODO: add subscription to all events
       supabase
         .channel("custom-insert-channel")
         .on(

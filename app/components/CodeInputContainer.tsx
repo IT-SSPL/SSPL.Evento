@@ -7,9 +7,8 @@ export const CodeInputContainer = () => {
   const otpBoxReference = useRef([]);
 
   function handleChange(value: string, i: number) {
-    const numericValue = value.replace(/[^0-9]/g, "");
     const otpCopy = [...otp];
-    otpCopy[i] = numericValue;
+    otpCopy[i] = value.charAt(0);
     setOtp(otpCopy);
 
     if (value && i < 5) {
@@ -40,9 +39,12 @@ export const CodeInputContainer = () => {
           type="number"
           placeholder="●"
           value={digit}
-          maxLength={1}
           onChange={(e) => handleChange(e.target.value, i)}
           onKeyUp={(e) => handleBackspace(e, i)}
+          onKeyDown={(e) =>
+            !(/[0-9]/.test(e.key) || e.key === "Backspace") &&
+            e.preventDefault()
+          }
           ref={(ref) =>
             ((otpBoxReference.current[i] as HTMLElement) = ref as HTMLElement)
           }

@@ -44,8 +44,11 @@ async function SchedulePage() {
                   {scheduleEntries &&
                     scheduleEntries
                       .filter((entry) => entry.day === day.display_name)
-                      .map((entry) => (
-                        <div className="grid grid-cols-2 items-baseline">
+                      .map((entry, i) => (
+                        <div
+                          className="grid grid-cols-2 items-baseline"
+                          key={i}
+                        >
                           <p className="font-bold">{entry.time}</p>
                           <p className="text-end text-sm">{entry.name}</p>
                         </div>
