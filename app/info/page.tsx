@@ -7,31 +7,49 @@ import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
 import CustomIcon from "../components/CustomIcon";
 import PageWrapperClient from "../components/PageWrapperClient";
+import OneSignal from "react-onesignal";
+import runOneSignal from "@/utils/onesignal";
 
 //TODO: Add push notification (FIREBASE CLOUD MESSAGING, OneSignal or other)
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
   const [canSendMessages, setCanSendMessages] = useState<boolean>(false);
+  const [oneSignalInitialized, setOneSignalInitialized] =
+    useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
   const messagesContainerRef = useRef(null);
 
   const supabase = createClient();
 
+  const initializeOneSignal = async (uid: string) => {
+    if (oneSignalInitialized) {
+      return;
+    }
+    setOneSignalInitialized(true);
+    OneSignal.init({
+      appId: "d42739d2-07f9-48d8-a527-b7a96a56de2a",
+      safari_web_id: "web.onesignal.auto.10d6980b-bbad-483e-b993-08fa2a289dd8",
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
+    });
+    OneSignal.Slidedown.promptPush();
+
+    console.log("cos");
+
+    const data = await OneSignal.login(uid);
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        redirect("/login");
-      }
-
+    const initializationInfoPage = async () => {
       const { data, error } = await supabase.auth.getUser();
       if (error || !data?.user) {
         redirect("/");
       }
+
+      initializeOneSignal(data?.user.id);
 
       let { data: userRole } = await supabase
         .from("user")
@@ -58,7 +76,7 @@ function InfoPage() {
         .subscribe();
     };
 
-    fetchPosts();
+    initializationInfoPage();
   }, []);
 
   useEffect(() => {
