@@ -8,7 +8,6 @@ import { MessageType } from "./info.types";
 import CustomIcon from "../components/CustomIcon";
 import PageWrapperClient from "../components/PageWrapperClient";
 import OneSignal from "react-onesignal";
-import runOneSignal from "@/utils/onesignal";
 
 //TODO: Add push notification (FIREBASE CLOUD MESSAGING, OneSignal or other)
 
