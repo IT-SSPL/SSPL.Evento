@@ -26,16 +26,6 @@ function InfoPage() {
       return;
     }
     setOneSignalInitialized(true);
-    await OneSignal.init({
-      appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID!,
-      notifyButton: {
-        enable: true,
-      },
-
-      allowLocalhostAsSecureOrigin: true,
-    });
-
-    await OneSignal.login(uid);
   };
 
   useEffect(() => {
@@ -45,7 +35,17 @@ function InfoPage() {
         redirect("/");
       }
 
-      initializeOneSignal(data?.user.id);
+      /// Initialize OneSignal
+      await OneSignal.init({
+        appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID!,
+        notifyButton: {
+          enable: true,
+        },
+
+        allowLocalhostAsSecureOrigin: true,
+      });
+
+      await OneSignal.login(data?.user.id!);
 
       let { data: userRole } = await supabase
         .from("user")
