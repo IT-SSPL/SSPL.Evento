@@ -106,6 +106,14 @@ function InfoPage() {
             />
           ))}
       </main>
+      <div
+        className="fixed right-4 top-10 btn btn-info"
+        onClick={() => {
+          OneSignal.Slidedown.promptPush();
+        }}
+      >
+        Zezwalaj
+      </div>
       {canSendMessages && (
         <form
           action={handleSendMessage}
