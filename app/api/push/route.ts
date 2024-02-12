@@ -34,6 +34,8 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const { record } = await request.json();
+
   const { data: subscriptionsQuery } = await supabase
     .from("subscriptions")
     .select("subscription");
@@ -50,7 +52,7 @@ export async function GET(request: NextRequest) {
   subscriptions.forEach((s) => {
     const payload = JSON.stringify({
       title: "TripApp: Nowa wiadomość!",
-      body: "Hello World",
+      body: `${record.message}`,
     });
     webpush.sendNotification(s, payload);
   });
