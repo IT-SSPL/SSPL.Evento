@@ -26,19 +26,16 @@ function InfoPage() {
       return;
     }
     setOneSignalInitialized(true);
-    OneSignal.init({
-      appId: "d42739d2-07f9-48d8-a527-b7a96a56de2a",
-      safari_web_id: "web.onesignal.auto.10d6980b-bbad-483e-b993-08fa2a289dd8",
+    await OneSignal.init({
+      appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID!,
       notifyButton: {
         enable: true,
       },
+
       allowLocalhostAsSecureOrigin: true,
     });
-    OneSignal.Slidedown.promptPush();
 
-    console.log("cos");
-
-    const data = await OneSignal.login(uid);
+    await OneSignal.login(uid);
   };
 
   useEffect(() => {
