@@ -8,44 +8,42 @@ import { MessageType } from "./info.types";
 import CustomIcon from "../components/CustomIcon";
 import PageWrapperClient from "../components/PageWrapperClient";
 import OneSignal from "react-onesignal";
+import runOneSignal from "@/utils/onesignal";
 
 //TODO: Add push notification (FIREBASE CLOUD MESSAGING, OneSignal or other)
 
 function InfoPage() {
   const [allMessages, setAllMessages] = useState<MessageType[]>([]);
   const [canSendMessages, setCanSendMessages] = useState<boolean>(false);
-  const [oneSignalInitialized, setOneSignalInitialized] =
-    useState<boolean>(false);
+  // const [oneSignalInitialized, setOneSignalInitialized] =
+  //   useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
   const messagesContainerRef = useRef(null);
 
   const supabase = createClient();
 
-  const initializeOneSignal = async (uid: string) => {
-    if (oneSignalInitialized) {
-      return;
-    }
-    setOneSignalInitialized(true);
-  };
+  // TODO: add subscription to all events
+  supabase
+    .channel("custom-insert-channel")
+    .on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "messages" },
+      (payload) => {
+        setAllMessages((prev) => [...prev, payload.new as MessageType]);
+      }
+    )
+    .subscribe();
 
   useEffect(() => {
+    runOneSignal();
+
     const initializationInfoPage = async () => {
       const { data, error } = await supabase.auth.getUser();
       if (error || !data?.user) {
         redirect("/");
       }
 
-      /// Initialize OneSignal
-      await OneSignal.init({
-        appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID!,
-        notifyButton: {
-          enable: true,
-        },
-
-        allowLocalhostAsSecureOrigin: true,
-      });
-
-      await OneSignal.login(data?.user.id!);
+      await OneSignal.login(data?.user.id);
 
       let { data: userRole } = await supabase
         .from("user")
@@ -58,18 +56,6 @@ function InfoPage() {
 
       let { data: messages } = await supabase.from("messages").select("*");
       setAllMessages(messages as MessageType[]);
-
-      // TODO: add subscription to all events
-      supabase
-        .channel("custom-insert-channel")
-        .on(
-          "postgres_changes",
-          { event: "INSERT", schema: "public", table: "messages" },
-          (payload) => {
-            setAllMessages((prev) => [...prev, payload.new as MessageType]);
-          }
-        )
-        .subscribe();
     };
 
     initializationInfoPage();
