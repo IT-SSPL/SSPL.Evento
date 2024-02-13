@@ -7,6 +7,11 @@ import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
 import CustomIcon from "../components/CustomIcon";
 import PageWrapperClient from "../components/PageWrapperClient";
+import dynamic from "next/dynamic";
+
+const Notifications = dynamic(() => import("../components/Notifications"), {
+  ssr: false, // Make sure to render component client side to access window and Notification APIs
+});
 
 //TODO: Add push notification (FIREBASE CLOUD MESSAGING, OneSignal or other)
 
@@ -91,6 +96,7 @@ function InfoPage() {
       }
       hasSidebar
     >
+      <Notifications />
       <main
         className="animate-in flex-1 w-full mb-12"
         id="messageContainer"
