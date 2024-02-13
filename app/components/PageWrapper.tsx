@@ -50,7 +50,7 @@ export default function PageWrapper({
           </div>
         </div>
       </div>
-      <div className="drawer-side z-30">
+      <div className="drawer-side z-40">
         <label
           htmlFor="my-drawer-3"
           aria-label="close sidebar"

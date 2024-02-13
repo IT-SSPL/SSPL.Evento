@@ -8,14 +8,14 @@ const notificationsSupported = () =>
 export default function Notifications() {
   if (!notificationsSupported()) {
     return (
-      <div className="fixed top-20 right-1/2 translate-x-1/2 z-50">
+      <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
         Zainstaluj aplikacje jako PWA by otrzymywać powiadomienia
       </div>
     );
   }
 
   return (
-    <div className="fixed top-20 right-1/2 translate-x-1/2 z-50">
+    <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
       <button onClick={subscribe} className="btn btn-sm btn-info btn-outline">
         Zapytaj o pozwolenie i zasubskrybuj!
       </button>
