@@ -96,6 +96,7 @@ function InfoPage() {
       }
       hasSidebar
     >
+      <Notifications />
       <main
         className="animate-in flex-1 w-full mb-12"
         id="messageContainer"
@@ -110,7 +111,6 @@ function InfoPage() {
               created_at={message.created_at}
             />
           ))}
-        <Notifications />
       </main>
       {canSendMessages && (
         <form

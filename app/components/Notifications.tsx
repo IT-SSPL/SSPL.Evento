@@ -7,14 +7,19 @@ const notificationsSupported = () =>
 
 export default function Notifications() {
   if (!notificationsSupported()) {
-    return <h3>Please install the PWA first!</h3>;
+    return (
+      <div className="fixed top-20 right-1/2 translate-x-1/2 z-50">
+        Zainstaluj aplikacje jako PWA by otrzymywać powiadomienia
+      </div>
+    );
   }
 
   return (
-    <>
-      <h3>WebPush PWA</h3>
-      <button onClick={subscribe}>Ask permission and subscribe!</button>
-    </>
+    <div className="fixed top-20 right-1/2 translate-x-1/2 z-50">
+      <button onClick={subscribe} className="btn btn-sm btn-info btn-outline">
+        Zapytaj o pozwolenie i zasubskrybuj!
+      </button>
+    </div>
   );
 }
 
