@@ -14,26 +14,10 @@ const supabase = createBrowserClient(
 );
 
 export async function POST(request: NextRequest) {
-  const subscription = (await request.json()) as PushSubscription | null;
+  const { record } = await request.json();
 
-  if (!subscription) {
-    console.error("No subscription was provided!");
-    return;
-  }
+  const content = record.message || "Sprawdź nową wiadomość w aplikacji!";
 
-  try {
-    const updatedDb = await supabase
-      .from("subscriptions")
-      .insert([{ subscription: subscription }]);
-
-    return NextResponse.json({ message: "success", updatedDb });
-  } catch (error) {
-    console.error("Error saving subscription to DB", error);
-    return NextResponse.json({ message: "error" });
-  }
-}
-
-export async function GET(request: NextRequest) {
   const { data: subscriptionsQuery } = await supabase
     .from("subscriptions")
     .select("subscription");
@@ -50,7 +34,7 @@ export async function GET(request: NextRequest) {
   subscriptions.forEach((s) => {
     const payload = JSON.stringify({
       title: "TripApp: Nowa wiadomość!",
-      body: "Sprawdź nową wiadomość w aplikacji!",
+      body: content,
     });
     webpush.sendNotification(s, payload);
   });
