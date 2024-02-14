@@ -1,5 +1,4 @@
-import { IUser } from "@/app/types/types";
-import React from "react";
+import { IUser } from "@/types/types";
 
 export const ProfileInfo = ({ user }: { user: IUser }) => {
   return (

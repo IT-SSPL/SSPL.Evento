@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { createClient } from "@/utils/supabase/server";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import PageWrapperServer from "./components/PageWrapperServer";
-import CustomIcon from "./components/CustomIcon";
+import PageWrapperServer from "../components/PageWrapperServer";
+import CustomIcon from "../components/CustomIcon";
 
 export default async function IndexPage() {
   const cookieStore = cookies();

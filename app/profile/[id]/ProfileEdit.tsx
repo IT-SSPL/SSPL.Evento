@@ -1,7 +1,7 @@
 "use client";
 
-import { IUser } from "@/app/types/types";
 import { useState } from "react";
+import { IUser } from "@/types/types";
 
 const InputRow = ({
   label,

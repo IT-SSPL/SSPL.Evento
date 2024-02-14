@@ -1,4 +1,4 @@
-import PageWrapperServer from "../components/PageWrapperServer";
+import PageWrapperServer from "@/components/PageWrapperServer";
 
 export default function LoginLayout({
   children,

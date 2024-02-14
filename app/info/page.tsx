@@ -2,14 +2,15 @@
 
 import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+
 import { createClient } from "@/utils/supabase/client";
 import { InfoMessage } from "./InfoMessage";
 import { MessageType } from "./info.types";
-import CustomIcon from "../components/CustomIcon";
-import PageWrapperClient from "../components/PageWrapperClient";
-import dynamic from "next/dynamic";
+import CustomIcon from "@/components/CustomIcon";
+import PageWrapperClient from "@/components/PageWrapperClient";
 
-const Notifications = dynamic(() => import("../components/Notifications"), {
+const Notifications = dynamic(() => import("@/components/Notifications"), {
   ssr: false, // Make sure to render component client side to access window and Notification APIs
 });
 

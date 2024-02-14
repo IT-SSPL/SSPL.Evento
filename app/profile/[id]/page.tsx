@@ -5,11 +5,11 @@ import { redirect } from "next/navigation";
 import { IoMdRefresh } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 
-import PageWrapperServer from "@/app/components/PageWrapperServer";
+import PageWrapperServer from "@/components/PageWrapperServer";
 import { createClient } from "@/utils/supabase/server";
 import { ProfileInfo } from "./ProfileInfo";
 import { ProfileEdit } from "./ProfileEdit";
-import { IUser } from "@/app/types/types";
+import { IUser } from "@/types/types";
 import { emptyIfNull } from "@/utils/emptyIfNull";
 
 const ProfilePage = async ({

@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { HiExternalLink } from "react-icons/hi";
 
 import { createClient } from "@/utils/supabase/server";
-import PageWrapperServer from "../components/PageWrapperServer";
-import CustomIcon from "../components/CustomIcon";
+import PageWrapperServer from "@/components/PageWrapperServer";
+import CustomIcon from "@/components/CustomIcon";
 
 async function TrailsPage() {
   const cookieStore = cookies();

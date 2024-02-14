@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LuKeySquare } from "react-icons/lu";
 
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { IUser } from "../types/types";
 
 export const ProfileCard = ({ user }: { user: IUser }) => {

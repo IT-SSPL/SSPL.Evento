@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import { ProfileCard } from "@/app/components/ProfileCard";
-import PageWrapperServer from "../components/PageWrapperServer";
-import CustomIcon from "../components/CustomIcon";
+import { ProfileCard } from "@/components/ProfileCard";
+import PageWrapperServer from "@/components/PageWrapperServer";
+import CustomIcon from "@/components/CustomIcon";
 
 async function CrewPage() {
   const cookieStore = cookies();

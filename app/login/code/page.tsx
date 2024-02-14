@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { CodeInputContainer } from "@/app/components/CodeInputContainer";
+import { CodeInputContainer } from "@/components/CodeInputContainer";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function LoginCodePage({

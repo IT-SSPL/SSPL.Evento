@@ -4,8 +4,8 @@ import Link from "next/link";
 import { IoIosLink } from "react-icons/io";
 
 import { createClient } from "@/utils/supabase/server";
-import PageWrapperServer from "../components/PageWrapperServer";
-import CustomIcon from "../components/CustomIcon";
+import PageWrapperServer from "@/components/PageWrapperServer";
+import CustomIcon from "@/components/CustomIcon";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
 async function SchedulePage() {
