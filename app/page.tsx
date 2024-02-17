@@ -1,38 +1,28 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { createClient } from "@/utils/supabase/server";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import PageWrapperServer from "../components/PageWrapperServer";
 import CustomIcon from "../components/CustomIcon";
+import ContentWithNav from "@/components/ContentWithNav";
 
 export default async function IndexPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-
-  if (error || !user) {
-    redirect("/login");
-  }
-
-  let { data: module } = await supabase
-    .from("module")
-    .select("*")
+  const { data: modules } = await supabase
+    .from("modules")
+    .select("name, path")
     .is("isVisible", true);
 
   return (
-    <PageWrapperServer title="TripApp" hasSidebar>
+    <ContentWithNav title="TripApp" hasSidebar>
       <div className="animate-in flex-1 flex flex-col w-full items-center">
         <main className="flex-1 flex flex-col gap-4 w-full">
           <h1 className="font-bold text-3xl text-center">Cześć 👋</h1>
           <ul className="menu rounded-box text-center">
-            {module &&
-              module?.map((e, i) => (
+            {modules &&
+              modules?.map((e, i) => (
                 <li key={i} className="border-b">
                   <Link
                     href={`/${e.path}`}
@@ -48,7 +38,7 @@ export default async function IndexPage() {
       </div>
       <footer className="w-full border-t border-t-foreground/10 pb-5 pt-3 flex justify-center text-center text-xs fixed bottom-0 bg-background left-0 max-h-12">
         <p>
-          Powered by{" "}
+          Created by{" "}
           <a
             href="https://samorzad.p.lodz.pl/"
             target="_blank"
@@ -59,6 +49,6 @@ export default async function IndexPage() {
           </a>
         </p>
       </footer>
-    </PageWrapperServer>
+    </ContentWithNav>
   );
 }

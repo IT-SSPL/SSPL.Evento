@@ -1,47 +1,54 @@
-import { IUser } from "@/types/types";
+import { Tables } from "@/types/supabase.types";
 
-export const ProfileInfo = ({ user }: { user: IUser }) => {
+const DataBox = ({
+  label,
+  value,
+  actionValue,
+  hasDivider,
+}: {
+  label: string;
+  value: string;
+  actionValue?: string;
+  hasDivider?: boolean;
+}) => {
+  return (
+    <>
+      actionValue ? (
+      <a className="join-item flex items-baseline" href={actionValue}>
+        <p className="font-bold text-lg">{label}:</p>
+        <p className="ml-2">{value}</p>
+      </a>
+      ) : (
+      <div className="join-item flex items-baseline">
+        <p className="font-bold text-lg">{label}:</p>
+        <p className="ml-2">{value}</p>
+      </div>
+      ){hasDivider && <div className="divider m-0.5" />}
+    </>
+  );
+};
+
+export const ProfileInfo = ({ user }: { user: Tables<"users"> }) => {
   return (
     <>
       {user.email && (
-        <>
-          <a
-            className="join-item flex items-baseline"
-            href={`mailto:${user.email}`}
-          >
-            <p className="font-bold text-lg">Email:</p>
-            <p className="ml-2">{user.email}</p>
-          </a>
-          <div className="divider m-0.5" />
-        </>
+        <DataBox
+          label="Email"
+          value={user.email}
+          actionValue={`mailto:${user.email}`}
+          hasDivider
+        />
       )}
       {user.phone && (
-        <>
-          <a
-            className="join-item flex items-baseline"
-            href={`tel:+48${user.phone}`}
-          >
-            <p className="font-bold text-lg">Telefon:</p>
-            <a className="ml-2">{user.phone}</a>
-          </a>
-          <div className="divider m-0.5" />
-        </>
+        <DataBox
+          label="Telefon"
+          value={user.phone}
+          actionValue={`tel:+48${user.phone}`}
+          hasDivider
+        />
       )}
-      {user.room && (
-        <>
-          <div className="join-item flex items-baseline">
-            <p className="font-bold text-lg">Pokój:</p>
-            <p className="ml-2">{user.room}</p>
-          </div>
-          <div className="divider m-0.5" />
-        </>
-      )}
-      {user.description && (
-        <div className="join-item flex items-baseline">
-          <p className="font-bold text-lg">Opis:</p>
-          <p className="ml-2">{user.description}</p>
-        </div>
-      )}
+      {user.room && <DataBox label="Pokój" value={user.room} hasDivider />}
+      {user.description && <DataBox label="Opis" value={user.description} />}
     </>
   );
 };

@@ -1,22 +1,11 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { HiExternalLink } from "react-icons/hi";
 
-import { createClient } from "@/utils/supabase/server";
-import PageWrapperServer from "@/components/PageWrapperServer";
 import CustomIcon from "@/components/CustomIcon";
+import ContentWithNav from "@/components/ContentWithNav";
 
 async function TrailsPage() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/");
-  }
-
   return (
-    <PageWrapperServer
+    <ContentWithNav
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
@@ -26,7 +15,7 @@ async function TrailsPage() {
       hasSidebar
     >
       <main className="animate-in w-full flex justify-center">
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl max-h-fit">
           <figure>
             <img
               src="https://zimowisko.samorzad.p.lodz.pl/trasy.jpg"
@@ -44,7 +33,7 @@ async function TrailsPage() {
           </div>
         </div>
       </main>
-    </PageWrapperServer>
+    </ContentWithNav>
   );
 }
 

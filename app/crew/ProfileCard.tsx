@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { LuKeySquare } from "react-icons/lu";
 
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import { IUser } from "../types/types";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import { Tables } from "../../types/supabase.types";
 
-export const ProfileCard = ({ user }: { user: IUser }) => {
+export const ProfileCard = ({ user }: { user: Tables<"users"> }) => {
   return (
     <Link
       href={`/profile/${user.id}`}
@@ -29,7 +29,7 @@ export const ProfileCard = ({ user }: { user: IUser }) => {
         <div className="card-actions">
           <div className="badge badge-info flex items-center">
             <LuKeySquare className="mr-2" />
-            {user.room !== null ? capitalizeFirstLetter(user.room) : ""}
+            {capitalizeFirstLetter(user.room)}
           </div>
         </div>
       </div>

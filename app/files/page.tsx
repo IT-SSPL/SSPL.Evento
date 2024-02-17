@@ -1,10 +1,9 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { IoIosLink } from "react-icons/io";
 
 import { createClient } from "@/utils/supabase/server";
-import PageWrapperServer from "@/components/PageWrapperServer";
+import ContentWithNav from "@/components/ContentWithNav";
 import CustomIcon from "@/components/CustomIcon";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
@@ -12,15 +11,10 @@ async function SchedulePage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/");
-  }
-
-  let { data: docEntries } = await supabase.from("docs").select("*");
+  const { data: docEntries } = await supabase.from("docs").select("*");
 
   return (
-    <PageWrapperServer
+    <ContentWithNav
       title={
         <>
           <CustomIcon name="filesModuleIcon" className="mr-2" />
@@ -45,7 +39,7 @@ async function SchedulePage() {
             ))}
         </ul>
       </main>
-    </PageWrapperServer>
+    </ContentWithNav>
   );
 }
 

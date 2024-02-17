@@ -1,12 +1,17 @@
-import PageWrapperServer from "@/components/PageWrapperServer";
+import ContentWithNav from "@/components/ContentWithNav";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 
 export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
   return (
-    <PageWrapperServer title="TripApp">
+    <ContentWithNav title="TripApp">
       <main className="animate-in flex-1 flex flex-col items-center justify-center relative">
         {children}
       </main>
@@ -24,6 +29,6 @@ export default function LoginLayout({
           </a>
         </p>
       </footer>
-    </PageWrapperServer>
+    </ContentWithNav>
   );
 }

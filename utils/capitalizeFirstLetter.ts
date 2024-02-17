@@ -1,3 +1,3 @@
-export const capitalizeFirstLetter = (string: string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalizeFirstLetter = (value: string | null) => {
+  return value !== null ? value.charAt(0).toUpperCase() + value.slice(1) : "";
 };
