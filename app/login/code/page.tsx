@@ -1,13 +1,14 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { CodeInputContainer } from "@/components/CodeInputContainer";
+import { CodeInputContainer } from "@/app/login/code/CodeInputContainer";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { z } from "zod";
 
 export default function LoginCodePage({
   searchParams,
 }: {
-  searchParams: { message: string; email: string };
+  searchParams: { message: string };
 }) {
   const validateCode = async (formData: FormData) => {
     "use server";
@@ -20,21 +21,33 @@ export default function LoginCodePage({
       formData.get("num5") +
       formData.get("num6");
 
+    const tokenSchema = z.string().length(6);
+
+    try {
+      tokenSchema.parse(token);
+    } catch (error) {
+      return redirect(`/login/code?message=Invalid code`);
+    }
+
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
+
+    const email = cookieStore.get("emailForSignIn")?.value as string;
 
     const {
       data: { session },
       error,
     } = await supabase.auth.verifyOtp({
-      email: searchParams.email,
+      email: email,
       token: token,
       type: "email",
     });
 
     if (error) {
-      return redirect(`/login/code?message=Incorrect Code`);
+      return redirect(`/login/code?message=Incorrect value`);
     }
+
+    cookieStore.delete("emailForSignIn");
 
     if (session) {
       const { error } = await supabase.auth.setSession({
@@ -61,7 +74,9 @@ export default function LoginCodePage({
         <div className="divider"></div>
 
         <div className="form-control gap-4">
-          <button className="btn btn-info">Enter</button>
+          <button className="btn btn-info" type="submit">
+            Wprowadz kod
+          </button>
         </div>
       </form>
       {searchParams?.message && (

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { z } from "zod";
 
 export default function LoginPage({
   searchParams,
@@ -12,6 +13,14 @@ export default function LoginPage({
     "use server";
 
     const email = formData.get("email") as string;
+    const emailSchema = z.string().email();
+
+    try {
+      emailSchema.parse(email);
+    } catch (error) {
+      return redirect("/login?message=Invalid email address");
+    }
+
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
@@ -27,7 +36,9 @@ export default function LoginPage({
       return redirect("/login?message=Too many requests. Try again later.");
     }
 
-    return redirect(`/login/code?email=${email}`);
+    cookieStore.set("emailForSignIn", email);
+
+    return redirect(`/login/code`);
   };
 
   return (
@@ -47,7 +58,9 @@ export default function LoginPage({
         <div className="divider"></div>
 
         <div className="form-control gap-4">
-          <button className="btn btn-info">Sign In</button>
+          <button className="btn btn-info" type="submit">
+            Zaloguj się
+          </button>
         </div>
       </form>
       {searchParams?.message && (

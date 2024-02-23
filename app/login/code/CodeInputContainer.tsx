@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 
 export const CodeInputContainer = () => {
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const otpBoxReference = useRef([]);
 
   function handleChange(value: string, i: number) {
@@ -31,7 +31,7 @@ export const CodeInputContainer = () => {
 
   return (
     <div className="grid grid-cols-6 gap-4">
-      {otp.map((digit, i) => (
+      {otp.map((digit: string, i: number) => (
         <input
           key={i}
           name={`num${i + 1}`}

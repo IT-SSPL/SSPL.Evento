@@ -1,5 +1,8 @@
 "use client";
 
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { IoIosNotificationsOutline } from "react-icons/io";
+
 const notificationsSupported = () =>
   "Notification" in window &&
   "serviceWorker" in navigator &&
@@ -9,15 +12,24 @@ export default function Notifications() {
   if (!notificationsSupported()) {
     return (
       <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
-        Zainstaluj aplikacje jako PWA by otrzymywać powiadomienia
+        <div role="alert" className="alert gap-1">
+          <IoIosInformationCircleOutline className="text-2xl" />
+          <span className="text-sm">
+            Zainstaluj aplikacje by móc otrzymywać powiadomienia!
+          </span>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
-      <button onClick={subscribe} className="btn btn-sm btn-info btn-outline">
-        Zapytaj o pozwolenie i zasubskrybuj!
+      <button
+        onClick={subscribe}
+        className="btn btn-sm btn-info btn-outline bg-background"
+      >
+        <IoIosNotificationsOutline className="text-xl" />
+        <span className="text-sm">Włącz powiadmonienia!</span>
       </button>
     </div>
   );

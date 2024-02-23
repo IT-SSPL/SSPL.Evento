@@ -1,25 +1,21 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import PageWrapperServer from "@/components/PageWrapperServer";
+import ContentWithNav from "@/components/ContentWithNav";
 import CustomIcon from "@/components/CustomIcon";
 
 async function SchedulePage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/");
-  }
+  const { data: days } = await supabase.from("days").select("*");
 
-  let { data: days } = await supabase.from("days").select("*");
-
-  let { data: scheduleEntries } = await supabase.from("schedules").select("*");
+  const { data: scheduleEntries } = await supabase
+    .from("schedules")
+    .select("*");
 
   return (
-    <PageWrapperServer
+    <ContentWithNav
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
@@ -58,7 +54,7 @@ async function SchedulePage() {
             </div>
           ))}
       </main>
-    </PageWrapperServer>
+    </ContentWithNav>
   );
 }
 

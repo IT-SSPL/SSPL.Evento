@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { Viewport } from "next";
 
 import "./globals.css";
+import PageWrapper from "@/components/PageWrapper";
 
 export const metadata: Metadata = {
   title: "ZimowiskApp",
@@ -30,9 +31,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F9FAFB" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#F9FAFB" }],
 };
 
 export default async function RootLayout({
@@ -43,7 +42,7 @@ export default async function RootLayout({
   return (
     <html lang="pl" className={GeistSans.className}>
       <body className="bg-background text-foreground min-h-screen">
-        {children}
+        <PageWrapper>{children}</PageWrapper>
       </body>
     </html>
   );

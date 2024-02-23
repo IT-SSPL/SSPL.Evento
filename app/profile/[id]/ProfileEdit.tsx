@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { IUser } from "@/types/types";
+import { useRouter } from "next/navigation";
+
+import { updateProfileData } from "./updateProfileData";
+import { Tables } from "@/types/supabase.types";
 
 const InputRow = ({
   label,
@@ -9,44 +12,64 @@ const InputRow = ({
   name,
   placeholderText = "...",
   pattern,
+  isDisabled,
+  hasDivider,
 }: {
   label: string;
-  value: string;
+  value: string | null;
   name: string;
   placeholderText?: string;
   pattern?: string;
+  isDisabled?: boolean;
+  hasDivider?: boolean;
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
   return (
-    <div className="join-item flex items-baseline self-end">
-      <p className="font-bold text-lg">{label}:</p>
-      <input
-        className="ml-2 input input-ghost w-full p-2 h-8"
-        placeholder={placeholderText}
-        pattern={pattern}
-        name={name}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-    </div>
+    <>
+      <div className="join-item flex items-baseline self-end">
+        <p className="font-bold text-lg">{label}:</p>
+        <input
+          className="ml-2 input input-ghost w-full p-2 h-8"
+          placeholder={placeholderText}
+          pattern={pattern}
+          name={name}
+          value={inputValue || ""}
+          onChange={(e) => setInputValue(e.target.value)}
+          disabled={isDisabled}
+        />
+      </div>
+      {hasDivider && <div className="divider m-0.5" />}
+    </>
   );
 };
 
-export const ProfileEdit = ({ user }: { user: IUser }) => {
+export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
+  const router = useRouter();
+
   return (
-    <>
-      <InputRow label="Imię" value={user.name} name="name" />
-      <div className="divider m-0.5" />
+    <form
+      action={async (e) => {
+        await updateProfileData(e, user);
+        router.refresh();
+      }}
+    >
+      <InputRow label="Imię" value={user.name} name="name" hasDivider />
 
-      <InputRow label="Nazwisko" value={user.surname} name="surname" />
-      <div className="divider m-0.5" />
+      <InputRow
+        label="Nazwisko"
+        value={user.surname}
+        name="surname"
+        hasDivider
+      />
 
-      <div className="join-item flex items-baseline">
-        <p className="font-bold text-lg">Email:</p>
-        <p className="ml-2">{user.email}</p>
-      </div>
-      <div className="divider m-0.5" />
+      <InputRow
+        label="Email"
+        value={user.email}
+        name="email"
+        isDisabled
+        hasDivider
+      />
 
       <InputRow
         label="Telefon"
@@ -54,16 +77,24 @@ export const ProfileEdit = ({ user }: { user: IUser }) => {
         name="phone"
         placeholderText="000000000"
         pattern="[0-9]{9}"
+        hasDivider
       />
-      <div className="divider m-0.5" />
 
       <InputRow
         label="Pokój"
         value={user.room}
         name="room"
         placeholderText=".../..."
+        hasDivider
       />
-      <div className="divider m-0.5" />
+
+      <InputRow
+        label="Facebook"
+        value={user.facebook_nickname}
+        name="facebook"
+        placeholderText="nickname"
+        hasDivider
+      />
 
       <div className="join-item flex items-baseline justify-between">
         <p className="font-bold text-lg">Zdjęcie:</p>
@@ -81,13 +112,13 @@ export const ProfileEdit = ({ user }: { user: IUser }) => {
           className="ml-2 textarea textarea-ghost w-full"
           rows={4}
           name="description"
-          defaultValue={user.description}
+          defaultValue={user.description || ""}
         ></textarea>
       </div>
 
       <div className="form-control my-8">
         <button className="btn btn-info">Zapisz</button>
       </div>
-    </>
+    </form>
   );
 };

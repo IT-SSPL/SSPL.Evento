@@ -1,53 +1,50 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IoIosMenu } from "react-icons/io";
 
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { emptyIfNull } from "@/utils/emptyIfNull";
-import { IModule, IUser } from "../types/types";
 import CustomIcon from "./CustomIcon";
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function PageWrapper({
+export default async function PageWrapper({
   children,
-  title,
-  hasSidebar,
-  userData,
-  module,
-  signOut,
 }: {
   children: React.ReactNode;
-  title: string | React.ReactNode;
-  hasSidebar?: boolean;
-  userData: IUser;
-  module: IModule[];
-  signOut: () => void;
 }) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const signOut = async () => {
+    "use server";
+
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    await supabase.auth.signOut();
+    return redirect("/login");
+  };
+
+  const { data: userAuth } = await supabase.auth.getUser();
+
+  const { data: modules } = await supabase
+    .from("modules")
+    .select("path, name")
+    .is("isVisible", true);
+
+  const { data: user } = await supabase
+    .from("users")
+    .select("id, name, image_path")
+    .eq("id", userAuth.user?.id!)
+    .single();
+
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="container mx-auto flex min-h-screen flex-col items-center">
-          {/* Navbar */}
-          <div className="w-full fixed left-0 top-0 navbar bg-background border-b border-b-foreground/10 h-12 z-20">
-            {hasSidebar && (
-              <div className="flex-none lg:hidden">
-                <label
-                  htmlFor="my-drawer-3"
-                  aria-label="open sidebar"
-                  className="btn btn-square btn-ghost absolute left-4 text-3xl btn-sm "
-                >
-                  <IoIosMenu />
-                </label>
-              </div>
-            )}
-            <header className="font-bold text-xl flex-1 flex justify-center items-center">
-              {title}
-            </header>
-          </div>
-          <div className="px-4 sm:px-10 md:px-20 lg:px-24 w-full flex flex-1 mt-24 mb-12">
-            {/* Page content here */}
-            {children}
-          </div>
+          {/* Content with Navbar */}
+          {children}
         </div>
       </div>
       <div className="drawer-side z-40">
@@ -64,8 +61,8 @@ export default function PageWrapper({
               Strona główna
             </Link>
           </li>
-          {module &&
-            module?.map((e, i) => (
+          {modules &&
+            modules?.map((e, i) => (
               <li key={i} className="border-b">
                 <Link href={`/${e.path}`} className="btn-ghost text-lg py-4">
                   {<CustomIcon name={`${e.path}ModuleIcon`} />}
@@ -73,40 +70,38 @@ export default function PageWrapper({
                 </Link>
               </li>
             ))}
-          {userData && (
-            <li className="fixed bottom-6 left-0 w-full">
-              <div className="flex justify-between items-center">
-                <Link
-                  href={`/profile/${userData.id}`}
-                  className="flex items-center"
-                >
-                  <div className="avatar">
-                    <div className="w-10 rounded-xl">
-                      <Image
-                        width={400}
-                        height={400}
-                        src={`${
-                          process.env.NEXT_PUBLIC_SUPABASE_URL as string
-                        }/storage/v1/object/public/profile-icons/${
-                          userData.image_path
-                        }`}
-                        alt="User profile picture"
-                        className="w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-2 text-lg">
-                    {userData.name !== null ? emptyIfNull(userData.name) : ""}
-                  </div>
-                </Link>
-
-                <form action={signOut}>
-                  <button className="btn btn-info btn-sm">Logout</button>
-                </form>
-              </div>
-            </li>
-          )}
         </ul>
+        {user && (
+          <div className="fixed bottom-6 left-0 w-80 px-4 flex justify-between items-center">
+            <Link
+              href={`/profile/${user.id}`}
+              className="flex flex-1 items-center"
+            >
+              <div className="avatar">
+                <div className="w-10 rounded-xl">
+                  <Image
+                    width={100}
+                    height={100}
+                    src={`${
+                      process.env.NEXT_PUBLIC_SUPABASE_URL as string
+                    }/storage/v1/object/public/profile-icons/${
+                      user.image_path
+                    }`}
+                    alt="User profile picture"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <p className="ml-2 text-lg">{emptyIfNull(user.name)}</p>
+            </Link>
+
+            <form action={signOut}>
+              <button className="btn btn-info btn-sm" type="submit">
+                Wyloguj
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

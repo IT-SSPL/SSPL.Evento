@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// Test endpoint to send notifications to all subscribers
 export async function GET(request: NextRequest) {
   const { data: subscriptionsQuery } = await supabase
     .from("subscriptions")

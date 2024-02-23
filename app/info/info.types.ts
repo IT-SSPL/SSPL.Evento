@@ -1,5 +1,5 @@
 export type MessageType = {
-  id: string;
-  created_at: Date;
-  message: string;
+  created_at: string;
+  id: number;
+  message: string | null;
 };
