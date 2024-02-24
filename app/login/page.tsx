@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { z } from "zod";
+
+import { createClient } from "@/utils/supabase/server";
 
 export default function LoginPage({
   searchParams,
@@ -48,7 +49,7 @@ export default function LoginPage({
           Email
         </label>
         <input
-          className="input input-bordered input-info w-full"
+          className="input input-bordered input-primary w-full"
           name="email"
           type="email"
           placeholder="you@example.com"
@@ -58,7 +59,7 @@ export default function LoginPage({
         <div className="divider"></div>
 
         <div className="form-control gap-4">
-          <button className="btn btn-info" type="submit">
+          <button className="btn btn-primary" type="submit">
             Zaloguj się
           </button>
         </div>

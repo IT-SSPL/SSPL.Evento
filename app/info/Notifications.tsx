@@ -26,7 +26,7 @@ export default function Notifications() {
     <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
       <button
         onClick={subscribe}
-        className="btn btn-sm btn-info btn-outline bg-background"
+        className="btn btn-sm btn-primary btn-outline bg-background"
       >
         <IoIosNotificationsOutline className="text-xl" />
         <span className="text-sm">Włącz powiadmonienia!</span>

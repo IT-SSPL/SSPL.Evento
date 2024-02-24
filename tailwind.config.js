@@ -9,15 +9,18 @@ module.exports = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        btn: {
-          background: "hsl(var(--btn-background))",
-          "background-hover": "hsl(var(--btn-background-hover))",
-        },
       },
     },
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light"],
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#00B5FF",
+        },
+      },
+    ],
   },
 };

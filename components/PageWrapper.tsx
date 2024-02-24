@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { emptyIfNull } from "@/utils/emptyIfNull";
 import CustomIcon from "./CustomIcon";
-import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 
 export default async function PageWrapper({
   children,
@@ -96,7 +96,7 @@ export default async function PageWrapper({
             </Link>
 
             <form action={signOut}>
-              <button className="btn btn-info btn-sm" type="submit">
+              <button className="btn btn-primary btn-sm" type="submit">
                 Wyloguj
               </button>
             </form>

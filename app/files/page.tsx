@@ -30,7 +30,7 @@ async function SchedulePage() {
               <li key={i} className="border-b">
                 <Link
                   href={e.path}
-                  className=" link-info text-lg py-4 w-full flex justify-center"
+                  className=" link-primary text-lg py-4 w-full flex justify-center"
                 >
                   <IoIosLink />
                   {capitalizeFirstLetter(e.name)}

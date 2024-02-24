@@ -35,7 +35,7 @@ export const CodeInputContainer = () => {
         <input
           key={i}
           name={`num${i + 1}`}
-          className="input input-bordered input-info px-0 text-center"
+          className="input input-bordered input-primary px-0 text-center"
           type="number"
           placeholder="●"
           value={digit}

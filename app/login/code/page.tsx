@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { CodeInputContainer } from "@/app/login/code/CodeInputContainer";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { z } from "zod";
+
+import { createClient } from "@/utils/supabase/server";
+import { CodeInputContainer } from "@/app/login/code/CodeInputContainer";
 
 export default function LoginCodePage({
   searchParams,
@@ -74,7 +75,7 @@ export default function LoginCodePage({
         <div className="divider"></div>
 
         <div className="form-control gap-4">
-          <button className="btn btn-info" type="submit">
+          <button className="btn btn-primary" type="submit">
             Wprowadz kod
           </button>
         </div>

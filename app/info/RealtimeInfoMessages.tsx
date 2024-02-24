@@ -22,7 +22,7 @@ const MessageBubble = ({ message, created_at }: MessageType) => {
           })}
         </time>
       </div>
-      <div className="chat-bubble chat-bubble-info">{message}</div>
+      <div className="chat-bubble chat-bubble-primary">{message}</div>
     </div>
   );
 };

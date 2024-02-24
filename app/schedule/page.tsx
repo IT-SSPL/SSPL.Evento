@@ -28,7 +28,7 @@ async function SchedulePage() {
         {days &&
           days.map((day, i) => (
             <div className="block w-full mb-4" key={i}>
-              <div className="collapse bg-info">
+              <div className="collapse bg-primary">
                 <input type="checkbox" />
                 <div className="collapse-title text-xl font-medium">
                   <div className="flex items-center">

@@ -2,8 +2,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 
 import { createClient } from "@/utils/supabase/server";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import CustomIcon from "../components/CustomIcon";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import CustomIcon from "@/components/CustomIcon";
 import ContentWithNav from "@/components/ContentWithNav";
 
 export default async function IndexPage() {

@@ -33,7 +33,7 @@ export const SendMessageInput = () => {
       <div className="join w-full">
         <input
           className={`input input-bordered join-item rounded-l-2xl w-full ${
-            error ? "input-error" : "input-info"
+            error ? "input-error" : "input-primary"
           }`}
           placeholder="napisz coś ..."
           name="message"
@@ -43,7 +43,10 @@ export const SendMessageInput = () => {
             setError(false);
           }}
         />
-        <button className="btn join-item rounded-r-2xl btn-info" type="submit">
+        <button
+          className="btn join-item rounded-r-2xl btn-primary"
+          type="submit"
+        >
           Wyślij
         </button>
       </div>

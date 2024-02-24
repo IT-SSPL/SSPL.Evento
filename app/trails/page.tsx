@@ -25,7 +25,7 @@ async function TrailsPage() {
           <div className="card-body">
             <h2 className="card-title">Link do mapki</h2>
             <a
-              className="link link-info flex"
+              className="link link-primary flex"
               href="https://zimowisko.samorzad.p.lodz.pl/trasy.jpg"
             >
               <HiExternalLink /> Mapa Tras

@@ -117,7 +117,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
       </div>
 
       <div className="form-control my-8">
-        <button className="btn btn-info">Zapisz</button>
+        <button className="btn btn-primary">Zapisz</button>
       </div>
     </form>
   );

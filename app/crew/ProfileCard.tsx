@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { LuKeySquare } from "react-icons/lu";
 
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-import { Tables } from "../../types/supabase.types";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { Tables } from "@/types/supabase.types";
 
 export const ProfileCard = ({ user }: { user: Tables<"users"> }) => {
   return (
@@ -27,7 +27,7 @@ export const ProfileCard = ({ user }: { user: Tables<"users"> }) => {
           {user.name} {user.surname}
         </h2>
         <div className="card-actions">
-          <div className="badge badge-info flex items-center">
+          <div className="badge badge-primary flex items-center">
             <LuKeySquare className="mr-2" />
             {capitalizeFirstLetter(user.room)}
           </div>

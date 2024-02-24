@@ -1,8 +1,9 @@
+import { redirect } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
+
 import { Tables } from "@/types/supabase.types";
 import { compressImage } from "@/utils/compressImage";
 import { createClient } from "@/utils/supabase/client";
-import { redirect } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
 
 export const updateProfileData = async (
   formData: FormData,
