@@ -26,13 +26,14 @@ const CustomIcon = (props: IconProps) => {
     crewModuleIcon: <FaPeopleGroup {...svgProps} />,
     trailsModuleIcon: <GiTrail {...svgProps} />,
     filesModuleIcon: <HiOutlineDocumentText {...svgProps} />,
+    ModuleIcon: <FaRegSnowflake {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,
     MonDayIcon: <GiMicrophone {...svgProps} />,
     TueDayIcon: <GiSpy {...svgProps} />,
     WedDayIcon: <LuCalendarHeart {...svgProps} />,
     ThuDayIcon: <GiRobe {...svgProps} />,
     FriDayIcon: <FaHome {...svgProps} />,
-    MainPageIcon: <FaRegSnowflake {...svgProps} />,
+    // MainPageIcon: <FaRegSnowflake {...svgProps} />,
   };
 
   return Icons[name];

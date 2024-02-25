@@ -13,17 +13,18 @@ const DataBox = ({
 }) => {
   return (
     <>
-      actionValue ? (
-      <a className="join-item flex items-baseline" href={actionValue}>
-        <p className="font-bold text-lg">{label}:</p>
-        <p className="ml-2">{value}</p>
-      </a>
+      {actionValue ? (
+        <a className="join-item flex items-baseline" href={actionValue}>
+          <p className="font-bold text-lg">{label}:</p>
+          <p className="ml-2">{value}</p>
+        </a>
       ) : (
-      <div className="join-item flex items-baseline">
-        <p className="font-bold text-lg">{label}:</p>
-        <p className="ml-2">{value}</p>
-      </div>
-      ){hasDivider && <div className="divider m-0.5" />}
+        <div className="join-item flex items-baseline">
+          <p className="font-bold text-lg">{label}:</p>
+          <p className="ml-2">{value}</p>
+        </div>
+      )}
+      {hasDivider && <div className="divider m-0.5" />}
     </>
   );
 };

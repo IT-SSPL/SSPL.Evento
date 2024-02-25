@@ -1,14 +1,22 @@
-import { IoIosMenu } from "react-icons/io";
+"use client";
 
-export default async function ContentWithNav({
+import { useRouter } from "next/navigation";
+import { IoIosMenu } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
+
+export default function ContentWithNav({
   children,
   title,
   hasSidebar,
+  hasArrow,
 }: {
   children: React.ReactNode;
   title: string | React.ReactNode;
   hasSidebar?: boolean;
+  hasArrow?: boolean;
 }) {
+  const router = useRouter();
+
   return (
     <>
       {/* Navbar */}
@@ -18,9 +26,19 @@ export default async function ContentWithNav({
             <label
               htmlFor="my-drawer-3"
               aria-label="open sidebar"
-              className="btn btn-square btn-ghost absolute left-4 text-3xl btn-sm "
+              className="btn btn-square btn-ghost absolute left-4 text-3xl btn-sm"
             >
               <IoIosMenu />
+            </label>
+          </div>
+        )}
+        {hasArrow && (
+          <div className="flex-none lg:hidden" onClick={() => router.back()}>
+            <label
+              aria-label="back to previous page"
+              className="btn btn-square btn-ghost absolute left-4 text-3xl btn-sm"
+            >
+              <IoIosArrowRoundBack />
             </label>
           </div>
         )}

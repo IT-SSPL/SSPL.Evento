@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoIosNotificationsOff } from "react-icons/io";
 
 const notificationsSupported = () =>
   "Notification" in window &&
@@ -9,6 +11,9 @@ const notificationsSupported = () =>
   "PushManager" in window;
 
 export default function Notifications() {
+  const [permission, setPermission] = useState(Notification.permission);
+  const [isClicked, setIsClicked] = useState(false);
+
   if (!notificationsSupported()) {
     return (
       <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
@@ -22,16 +27,39 @@ export default function Notifications() {
     );
   }
 
-  return (
+  return permission === "default" ? (
     <div className="fixed top-20 right-1/2 translate-x-1/2 z-30">
       <button
-        onClick={subscribe}
-        className="btn btn-sm btn-primary btn-outline bg-background"
+        onClick={async () => {
+          await subscribe();
+          setPermission(Notification.permission);
+        }}
+        className="btn btn-primary btn-outline bg-background h-fit w-max text-xs gap-0.5"
       >
-        <IoIosNotificationsOutline className="text-xl" />
-        <span className="text-sm">Włącz powiadmonienia!</span>
+        <IoIosNotificationsOutline className="text-2xl" />
+        Włącz powiadmonienia!
       </button>
     </div>
+  ) : permission === "denied" ? (
+    <div
+      className={`fixed top-20 z-30 cursor-pointer ${
+        isClicked ? "right-1/2 translate-x-1/2" : "right-4"
+      }`}
+      onClick={() => {
+        setIsClicked(!isClicked);
+      }}
+    >
+      <div role="alert" className="alert gap-1 p-2">
+        <IoIosNotificationsOff className="text-2xl" />
+        {isClicked && (
+          <span className="text-xs">
+            Odmówiłaś/eś dostępu do powiadomień. Zmień opcje w ustawienia.
+          </span>
+        )}
+      </div>
+    </div>
+  ) : (
+    <></>
   );
 }
 

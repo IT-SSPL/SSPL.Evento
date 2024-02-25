@@ -11,19 +11,19 @@ export type Database = {
     Tables: {
       days: {
         Row: {
-          display_name: string | null
+          display_name: string
           id: number
-          name: string | null
+          name: string
         }
         Insert: {
-          display_name?: string | null
+          display_name: string
           id?: number
-          name?: string | null
+          name: string
         }
         Update: {
-          display_name?: string | null
+          display_name?: string
           id?: number
-          name?: string | null
+          name?: string
         }
         Relationships: []
       }
@@ -67,19 +67,19 @@ export type Database = {
         Row: {
           id: number
           isVisible: boolean
-          name: string | null
+          name: string
           path: string
         }
         Insert: {
           id?: number
           isVisible?: boolean
-          name?: string | null
+          name: string
           path: string
         }
         Update: {
           id?: number
           isVisible?: boolean
-          name?: string | null
+          name?: string
           path?: string
         }
         Relationships: []

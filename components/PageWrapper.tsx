@@ -3,10 +3,9 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { emptyIfNull } from "@/utils/emptyIfNull";
-import CustomIcon from "./CustomIcon";
 import { createClient } from "@/utils/supabase/server";
+import { SideBar } from "./SideBar";
 
 export default async function PageWrapper({
   children,
@@ -53,24 +52,8 @@ export default async function PageWrapper({
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 flex-1">
-          {/* Sidebar content here */}
-          <li className="border-b">
-            <Link href="/" className="btn-ghost text-lg py-4">
-              <CustomIcon name="MainPageIcon" className="mr-2" />
-              Strona główna
-            </Link>
-          </li>
-          {modules &&
-            modules?.map((e, i) => (
-              <li key={i} className="border-b">
-                <Link href={`/${e.path}`} className="btn-ghost text-lg py-4">
-                  {<CustomIcon name={`${e.path}ModuleIcon`} />}
-                  {capitalizeFirstLetter(e.name)}
-                </Link>
-              </li>
-            ))}
-        </ul>
+        {/* Sidebar */}
+        {modules && <SideBar modules={modules} />}
         {user && (
           <div className="fixed bottom-6 left-0 w-80 px-4 flex justify-between items-center">
             <Link
