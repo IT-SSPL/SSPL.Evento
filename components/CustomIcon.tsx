@@ -11,6 +11,7 @@ import { GiRobe } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FaRegSnowflake } from "react-icons/fa";
+import { TbBrandTinder } from "react-icons/tb";
 
 type IconProps = {
   name: string;
@@ -26,6 +27,7 @@ const CustomIcon = (props: IconProps) => {
     crewModuleIcon: <FaPeopleGroup {...svgProps} />,
     trailsModuleIcon: <GiTrail {...svgProps} />,
     filesModuleIcon: <HiOutlineDocumentText {...svgProps} />,
+    tinderModuleIcon: <TbBrandTinder {...svgProps} />,
     ModuleIcon: <FaRegSnowflake {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,
     MonDayIcon: <GiMicrophone {...svgProps} />,
