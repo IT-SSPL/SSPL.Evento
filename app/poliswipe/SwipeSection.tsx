@@ -118,12 +118,14 @@ export const SwipeSection = ({ user }: { user: User }) => {
 
       <DndContext onDragEnd={handleDragEnd}>
         <div className="flex flex-1 relative">
-          <div className="absolute left-0 h-full flex translate-x-[-100%]">
+          {/* Disliked drop container */}
+          <div className="absolute left-0 h-full flex translate-x-[-120%]">
             <Droppable key={containers[0]} id={containers[0]}>
               {"Disliked"}
             </Droppable>
           </div>
 
+          {/* Swipe section */}
           <div className="w-full grid place-content-center">
             <div className="stack">
               {usersForSwipe ? (
@@ -161,7 +163,8 @@ export const SwipeSection = ({ user }: { user: User }) => {
             </div>
           </div>
 
-          <div className="absolute right-0 h-full flex translate-x-[100%]">
+          {/* Liked drop container */}
+          <div className="absolute right-0 h-full flex translate-x-[120%]">
             <Droppable key={containers[1]} id={containers[1]}>
               {"Liked"}
             </Droppable>
