@@ -10,6 +10,15 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
       },
+      keyframes: {
+        ghost: {
+          "0%, 100%": { transform: "translateX(-150%)" },
+          "50%": { transform: "translateX(150%)" },
+        },
+      },
+      animation: {
+        ghost: "ghost 10s ease-in-out infinite",
+      },
     },
   },
   plugins: [require("daisyui")],

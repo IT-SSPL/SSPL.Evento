@@ -126,6 +126,30 @@ export type Database = {
         }
         Relationships: []
       }
+      swipes: {
+        Row: {
+          created_at: string
+          id: number
+          owner: string | null
+          "swiped-left": string | null
+          "swiped-right": string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          owner?: string | null
+          "swiped-left"?: string | null
+          "swiped-right"?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          owner?: string | null
+          "swiped-left"?: string | null
+          "swiped-right"?: string | null
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           created_at: string

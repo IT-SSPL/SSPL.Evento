@@ -1,6 +1,5 @@
 import { HTMLProps } from "react";
-import { TbInfoHexagon } from "react-icons/tb";
-import { GrSchedule } from "react-icons/gr";
+import { TbInfoHexagonFilled } from "react-icons/tb";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GiTrail } from "react-icons/gi";
 import { FaBus } from "react-icons/fa";
@@ -9,9 +8,12 @@ import { GiSpy } from "react-icons/gi";
 import { LuCalendarHeart } from "react-icons/lu";
 import { GiRobe } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
-import { HiOutlineDocumentText } from "react-icons/hi";
+import { IoDocumentText } from "react-icons/io5";
+import { PiHandHeartFill } from "react-icons/pi";
+import { IoCalendar } from "react-icons/io5";
+import { HiHome } from "react-icons/hi2";
 import { FaRegSnowflake } from "react-icons/fa";
-import { TbBrandTinder } from "react-icons/tb";
+import { BsPeopleFill } from "react-icons/bs";
 
 type IconProps = {
   name: string;
@@ -22,13 +24,15 @@ const CustomIcon = (props: IconProps) => {
   const { name, ...svgProps } = props;
 
   const Icons: Record<IconProps["name"], any> = {
-    infoModuleIcon: <TbInfoHexagon {...svgProps} />,
-    scheduleModuleIcon: <GrSchedule {...svgProps} />,
+    infoModuleIcon: <TbInfoHexagonFilled {...svgProps} />,
+    scheduleModuleIcon: <IoCalendar {...svgProps} />,
     crewModuleIcon: <FaPeopleGroup {...svgProps} />,
     trailsModuleIcon: <GiTrail {...svgProps} />,
-    filesModuleIcon: <HiOutlineDocumentText {...svgProps} />,
-    tinderModuleIcon: <TbBrandTinder {...svgProps} />,
-    ModuleIcon: <FaRegSnowflake {...svgProps} />,
+    filesModuleIcon: <IoDocumentText {...svgProps} />,
+    poliswipeModuleIcon: <PiHandHeartFill {...svgProps} />,
+    matchesModuleIcon: <BsPeopleFill {...svgProps} />,
+
+    ModuleIcon: <HiHome {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,
     MonDayIcon: <GiMicrophone {...svgProps} />,
     TueDayIcon: <GiSpy {...svgProps} />,

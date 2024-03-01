@@ -13,7 +13,7 @@ const ProfilePage = async ({
   searchParams,
 }: {
   params: { id: string };
-  searchParams: { message: string };
+  searchParams: { message: string; poliswipe: string };
 }) => {
   const supabase = createClient(cookies());
   const { id } = params;
@@ -40,6 +40,12 @@ const ProfilePage = async ({
   return (
     <ContentWithNav title={`Profil użytkownika`} hasSidebar>
       <main className="animate-in flex-1 flex flex-col w-full">
+        {searchParams?.poliswipe && (
+          <p className="alert w-full mb-4 max-w-sm self-center text-sm">
+            {searchParams.poliswipe}
+          </p>
+        )}
+
         <div className="join pb-6">
           <div className="avatar join-item">
             <div className="w-40 rounded-xl">
