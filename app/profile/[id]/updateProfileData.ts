@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { Tables } from "@/types/supabase.types";
 import { compressImage } from "@/utils/compressImage";
 import { createClient } from "@/utils/supabase/client";
+import { z } from "zod";
+
+// TODO: if data no change, do not update
 
 export const updateProfileData = async (
   formData: FormData,
@@ -18,6 +21,32 @@ export const updateProfileData = async (
   const facebook = formData.get("facebook") as string;
   const image = formData.get("image") as File;
   const description = formData.get("description") as string;
+
+  const userData = {
+    name: name === "" ? null : name,
+    surname: surname === "" ? null : surname,
+    phone: phone === "" ? null : phone,
+    room: room === "" ? null : room,
+    facebook: facebook === "" ? null : facebook,
+    description: description === "" ? null : description,
+  };
+
+  // validate data
+  const nameSchema = z.string().min(1).max(30);
+  const surnameSchema = z.string().min(1).max(30);
+  const phoneSchema = z.nullable(z.string().length(9));
+  const facebookSchema = z.nullable(z.string().max(30));
+  const descriptionSchema = z.nullable(z.string().max(200));
+
+  try {
+    nameSchema.parse(userData.name);
+    surnameSchema.parse(userData.surname);
+    phoneSchema.parse(userData.phone);
+    facebookSchema.parse(userData.facebook);
+    descriptionSchema.parse(userData.description);
+  } catch (error) {
+    return redirect(`/profile/${user.id}?message=Niepoprawne dane`);
+  }
 
   // compress image
   const uploadCompressedImage = async (image: File) => {
@@ -39,17 +68,21 @@ export const updateProfileData = async (
   const { error } = await supabase
     .from("users")
     .update({
-      name,
-      surname,
-      phone,
-      room,
-      facebook_nickname: facebook,
-      description,
+      name: userData.name,
+      surname: userData.surname,
+      phone: userData.phone,
+      room: userData.room,
+      facebook_nickname: userData.facebook,
+      description: userData.description,
       image_path: image_path || user.image_path,
     })
     .eq("id", user?.id!);
 
   if (error) {
-    return redirect(`/profile/${user.id}?message=Try again later`);
+    return redirect(
+      `/profile/${user.id}?message=Wystąpił błąd podczas aktualizacji profilu`
+    );
   }
+
+  return redirect(`/profile/${user.id}?success=Profil zaktualizowany`);
 };

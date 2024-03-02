@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { IoMdRefresh } from "react-icons/io";
 import { cookies } from "next/headers";
+import { PiWarning } from "react-icons/pi";
+import { PiCheckCircle } from "react-icons/pi";
 
 import ContentWithNav from "@/components/ContentWithNav";
 import { createClient } from "@/utils/supabase/server";
@@ -13,7 +14,7 @@ const ProfilePage = async ({
   searchParams,
 }: {
   params: { id: string };
-  searchParams: { message: string; poliswipe: string };
+  searchParams: { message: string; success: string; poliswipe: string };
 }) => {
   const supabase = createClient(cookies());
   const { id } = params;
@@ -40,9 +41,21 @@ const ProfilePage = async ({
   return (
     <ContentWithNav title={`Profil użytkownika`} hasSidebar>
       <main className="animate-in flex-1 flex flex-col w-full">
-        {searchParams?.poliswipe && (
-          <p className="alert w-full mb-4 max-w-sm self-center text-sm">
+        {searchParams.poliswipe && (
+          <p className="alert w-full mb-4 max-w-sm self-center text-sm gap-1 p-2">
             {searchParams.poliswipe}
+          </p>
+        )}
+        {searchParams.message && (
+          <p className="alert w-full mb-4 max-w-sm self-center text-sm gap-1 p-2">
+            <PiWarning className="text-xl" />
+            {searchParams.message}
+          </p>
+        )}
+        {searchParams.success && (
+          <p className="alert w-full mb-4 max-w-sm self-center text-sm gap-1 p-2">
+            <PiCheckCircle className="text-xl" />
+            {searchParams.success}
           </p>
         )}
 
@@ -72,12 +85,6 @@ const ProfilePage = async ({
           <ProfileEdit user={userProfile} />
         ) : (
           <ProfileInfo user={userProfile} />
-        )}
-        {searchParams?.message && (
-          <p className="alert bottom-4 w-full max-w-sm self-center">
-            <IoMdRefresh className="text-3xl" />
-            {searchParams.message}
-          </p>
         )}
       </main>
     </ContentWithNav>

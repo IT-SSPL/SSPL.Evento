@@ -21,7 +21,7 @@ async function PoliSwipePage() {
       }
       hasSidebar
     >
-      <main className="animate-in w-full flex flex-col justify-center">
+      <main className="animate-in w-full flex flex-col justify-center overflow-hidden">
         {data.user && <SwipeSection user={data.user} />}
       </main>
     </ContentWithNav>
