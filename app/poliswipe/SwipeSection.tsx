@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { DndContext } from "@dnd-kit/core";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
 import { User } from "@supabase/supabase-js";
@@ -81,6 +81,7 @@ export const SwipeSection = ({ user }: { user: User }) => {
     currentUser: IUserForSwipe,
     direction: "left" | "right"
   ) => {
+    // Effect for match
     swipedMeRight.includes(currentUser.id) && setMatch(true);
 
     if (direction === "left") {

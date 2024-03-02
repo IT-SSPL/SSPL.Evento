@@ -11,35 +11,31 @@ async function MatchesPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  // Fetch user data
   const { data } = await supabase.auth.getUser();
 
-  console.log(data.user!.id);
-
-  const { data: swipes } = await supabase
+  // Fetch users who swiped me right
+  const { data: swiped_right } = await supabase
     .from("swipes")
     .select("owner")
     .eq("swiped-right", data.user!.id);
 
-  const iSwiped = swipes?.map((swipe) => swipe.owner);
-  console.log(iSwiped);
+  const userSwipedMeRight = swiped_right?.map((swipe) => swipe.owner);
 
-  const { data: swiped } = await supabase
+  // Users who I swiped right and they swiped me right (matches)
+  const { data: matches } = await supabase
     .from("swipes")
     .select("*")
     .eq("owner", data.user!.id)
-    .in("swiped-right", iSwiped!);
+    .in("swiped-right", userSwipedMeRight!);
 
-  console.log(swiped);
-  const matchesUsers = swiped?.map((matches) => matches["swiped-right"]);
+  const matchesUsers = matches?.map((match) => match["swiped-right"]);
 
-  console.log(matchesUsers);
-
+  // Fetch users data who I matched with
   const { data: users } = await supabase
     .from("users")
     .select("id, name, surname, facebook_nickname, image_path")
     .in("id", matchesUsers!);
-
-  console.log(users);
 
   return (
     <ContentWithNav
