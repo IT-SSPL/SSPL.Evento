@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
@@ -105,6 +111,13 @@ export const SwipeSection = ({ user }: { user: User }) => {
     }
   };
 
+  const sensors = useSensors(
+    useSensor(MouseSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 50, tolerance: 10 },
+    })
+  );
+
   return (
     <>
       {match && (
@@ -117,7 +130,7 @@ export const SwipeSection = ({ user }: { user: User }) => {
         />
       )}
 
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div className="flex flex-1 relative">
           {/* Disliked drop container */}
           <div className="absolute left-0 h-full flex translate-x-[-120%]">
