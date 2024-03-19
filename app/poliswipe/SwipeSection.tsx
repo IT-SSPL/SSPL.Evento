@@ -124,6 +124,20 @@ export const SwipeSection = ({ user }: { user: User }) => {
         <Confetti
           width={screen.width}
           height={screen.height}
+          colors={[
+            "#B10F2E",
+            "#B9314F",
+            "#DA3E52",
+            "#B23A48",
+            "#FCB9B2",
+            "#E83151",
+            "#F45866",
+            "#E8B4BC",
+            "#D282A6",
+            "#F4BBD3",
+            "#F686BD",
+            "#FE5D9F",
+          ]}
           numberOfPieces={500}
           recycle={false}
           onConfettiComplete={() => setMatch(false)}

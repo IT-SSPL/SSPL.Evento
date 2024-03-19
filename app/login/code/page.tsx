@@ -81,7 +81,7 @@ export default function LoginCodePage({
         </div>
       </form>
       {searchParams?.message && (
-        <p className="alert absolute bottom-4 w-full max-w-sm">
+        <p className="alert absolute bottom-20 w-full max-w-sm">
           <IoIosCloseCircleOutline className="text-3xl" />
           {searchParams.message}
         </p>
