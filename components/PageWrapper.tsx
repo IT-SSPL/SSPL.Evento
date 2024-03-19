@@ -1,11 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { emptyIfNull } from "@/utils/emptyIfNull";
 import { createClient } from "@/utils/supabase/server";
-import { SideBar } from "./SideBar";
+import { SideBarModuleList, SideBarProfile } from "./SideBar";
 
 export default async function PageWrapper({
   children,
@@ -53,30 +50,10 @@ export default async function PageWrapper({
           className="drawer-overlay"
         ></label>
         {/* Sidebar */}
-        {modules && <SideBar modules={modules} />}
+        {modules && <SideBarModuleList modules={modules} />}
         {user && (
           <div className="fixed bottom-6 left-0 w-80 px-4 flex justify-between items-center">
-            <Link
-              href={`/profile/${user.id}`}
-              className="flex flex-1 items-center"
-            >
-              <div className="avatar">
-                <div className="w-10 rounded-xl">
-                  <Image
-                    width={100}
-                    height={100}
-                    src={`${
-                      process.env.NEXT_PUBLIC_SUPABASE_URL as string
-                    }/storage/v1/object/public/profile-icons/${
-                      user.image_path
-                    }`}
-                    alt="User profile picture"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <p className="ml-2 text-lg">{emptyIfNull(user.name)}</p>
-            </Link>
+            <SideBarProfile user={user} />
 
             <form action={signOut}>
               <button className="btn btn-primary btn-sm" type="submit">

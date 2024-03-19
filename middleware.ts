@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
 
   if ((error || !data?.user) && path !== "/login" && path !== "/login/code") {
     const url = new URL(request.nextUrl.href);
-    console.log(url);
+    // console.log(url);
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }

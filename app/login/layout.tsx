@@ -1,16 +1,10 @@
-import { cookies } from "next/headers";
-
 import ContentWithNav from "@/components/ContentWithNav";
-import { createClient } from "@/utils/supabase/server";
 
 export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
   return (
     <ContentWithNav title="TripApp">
       <main className="animate-in flex-1 flex flex-col items-center justify-center relative">
