@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Evento PŁ to aplikacja PWA stworzona specjalnie dla uczestników wyjazdów organizowanych przez Samorządu Studenckiego Politechniki Łódzkiej, takich jak Adapciak czy Zimowiska. Znajdziesz w niej kompleksowe informacje dotyczące kadry, harmonogramu wycieczki oraz kanał komunikacyjny, zapewniający sprawną wymianę informacji.",
   generator: "Next.js",
-  manifest: "/manifest.json",
+  themeColor: "#F9FAFB",
   icons: [
     {
       url: "/icons/favicon.ico",
@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     {
       url: "/icons/favicon-32x32.png",
       sizes: "32x32",
+    },
+    {
+      url: "/icons/maskable_icon.png",
+      sizes: "512x512",
+      type: "maskable",
     },
   ],
 };
