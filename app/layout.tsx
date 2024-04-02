@@ -6,7 +6,7 @@ import "./globals.css";
 import PageWrapper from "@/components/PageWrapper";
 
 export const metadata: Metadata = {
-  title: "Evento",
+  title: `${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}`,
   description:
     "Evento PŁ to aplikacja PWA stworzona specjalnie dla uczestników wyjazdów organizowanych przez Samorządu Studenckiego Politechniki Łódzkiej, takich jak Adapciak czy Zimowiska. Znajdziesz w niej kompleksowe informacje dotyczące kadry, harmonogramu wycieczki oraz kanał komunikacyjny, zapewniający sprawną wymianę informacji.",
   generator: "Next.js",

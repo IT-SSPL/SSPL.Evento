@@ -2,9 +2,10 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ZimowiskApp",
-    short_name: "ZimowiskApp",
-    description: "Aplikacja dla uczestników Zimowiska SSPŁ 2024",
+    name: `${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}`,
+    short_name: `${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}`,
+    description:
+      "Evento PŁ to aplikacja PWA stworzona specjalnie dla uczestników wyjazdów organizowanych przez Samorządu Studenckiego Politechniki Łódzkiej, takich jak Adapciak czy Zimowiska. Znajdziesz w niej kompleksowe informacje dotyczące kadry, harmonogramu wycieczki oraz kanał komunikacyjny, zapewniający sprawną wymianę informacji.",
     lang: "pl",
     icons: [
       {

@@ -17,11 +17,7 @@ export default async function IndexPage() {
 
   return (
     <ContentWithNav
-      title={`${
-        process.env.NEXT_PUBLIC_APP_NAME !== undefined
-          ? process.env.NEXT_PUBLIC_APP_NAME
-          : "Evento"
-      }`}
+      title={`${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}`}
       hasSidebar
     >
       <div className="animate-in flex-1 flex flex-col w-full items-center">

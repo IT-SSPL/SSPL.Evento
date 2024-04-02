@@ -6,13 +6,7 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ContentWithNav
-      title={`${
-        process.env.NEXT_PUBLIC_APP_NAME !== undefined
-          ? process.env.NEXT_PUBLIC_APP_NAME
-          : "Evento"
-      }`}
-    >
+    <ContentWithNav title={`${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}`}>
       <main className="animate-in flex-1 flex flex-col items-center justify-center relative">
         {children}
       </main>

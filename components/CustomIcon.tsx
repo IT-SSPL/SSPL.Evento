@@ -9,6 +9,7 @@ import { LuCalendarHeart } from "react-icons/lu";
 import { GiRobe } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
+import { IoLogoFacebook } from "react-icons/io";
 import { PiHandHeartFill } from "react-icons/pi";
 import { IoCalendar } from "react-icons/io5";
 import { HiHome } from "react-icons/hi2";
@@ -31,6 +32,7 @@ const CustomIcon = (props: IconProps) => {
     filesModuleIcon: <IoDocumentText {...svgProps} />,
     poliswipeModuleIcon: <PiHandHeartFill {...svgProps} />,
     matchesModuleIcon: <BsPeopleFill {...svgProps} />,
+    redirectModuleIcon: <IoLogoFacebook {...svgProps} />,
 
     ModuleIcon: <HiHome {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,

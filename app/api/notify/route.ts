@@ -33,11 +33,7 @@ export async function POST(request: NextRequest) {
 
   subscriptions.forEach((s) => {
     const payload = JSON.stringify({
-      title: `${
-        process.env.NEXT_PUBLIC_APP_NAME !== undefined
-          ? process.env.NEXT_PUBLIC_APP_NAME
-          : "Evento"
-      }: Nowa wiadomość!`,
+      title: `${process.env.NEXT_PUBLIC_APP_NAME || "Evento"}: Nowa wiadomość!`,
       body: content,
     });
     webpush.sendNotification(s, payload);
