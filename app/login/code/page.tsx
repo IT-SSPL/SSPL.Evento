@@ -48,8 +48,6 @@ export default function LoginCodePage({
       return redirect(`/login/code?message=Incorrect value`);
     }
 
-    cookieStore.delete("emailForSignIn");
-
     if (session) {
       const { error } = await supabase.auth.setSession({
         access_token: session.access_token,
@@ -61,6 +59,7 @@ export default function LoginCodePage({
       }
     }
 
+    cookieStore.delete("emailForSignIn");
     return redirect("/");
   };
 

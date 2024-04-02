@@ -50,7 +50,11 @@ export async function GET(request: NextRequest) {
 
   subscriptions.forEach((s) => {
     const payload = JSON.stringify({
-      title: "TripApp: Nowa wiadomość!",
+      title: `${
+        process.env.NEXT_PUBLIC_APP_NAME !== undefined
+          ? process.env.NEXT_PUBLIC_APP_NAME
+          : "Evento"
+      }: Nowa wiadomość!`,
       body: "Sprawdź nową wiadomość w aplikacji!",
     });
     webpush.sendNotification(s, payload);

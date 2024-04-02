@@ -16,7 +16,14 @@ export default async function IndexPage() {
     .is("isVisible", true);
 
   return (
-    <ContentWithNav title="TripApp" hasSidebar>
+    <ContentWithNav
+      title={`${
+        process.env.NEXT_PUBLIC_APP_NAME !== undefined
+          ? process.env.NEXT_PUBLIC_APP_NAME
+          : "Evento"
+      }`}
+      hasSidebar
+    >
       <div className="animate-in flex-1 flex flex-col w-full items-center">
         <main className="flex-1 flex flex-col gap-4 w-full">
           <h1 className="font-bold text-3xl text-center">Cześć 👋</h1>
