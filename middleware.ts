@@ -55,8 +55,10 @@ export const config = {
      * - favicon.ico (favicon file)
      * - /api (API routes)
      * - /login (login page)
+     * - /icons (PWA icons)
+     * - manifest.webmanifest (PWA manifest)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|_next/image|favicon.ico|api|login).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api|login|icons|manifest.webmanifest).*)",
   ],
 };
