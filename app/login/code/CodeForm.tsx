@@ -17,7 +17,11 @@ export const CodeForm = ({
   }
 
   return (
-    <form className="w-full max-w-xs" action={validateCode}>
+    <form
+      className="w-full max-w-xs"
+      action={validateCode}
+      onSubmit={() => setSubmitted(true)}
+    >
       <label className="label">Kod</label>
 
       <div>
