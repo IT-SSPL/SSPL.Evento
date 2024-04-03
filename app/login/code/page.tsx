@@ -14,67 +14,54 @@ export default function LoginCodePage({
   const validateCode = async (formData: FormData) => {
     "use server";
 
-    console.log("Validating code");
+    const token =
+      (formData.get("num1") as string) +
+      formData.get("num2") +
+      formData.get("num3") +
+      formData.get("num4") +
+      formData.get("num5") +
+      formData.get("num6");
+
+    const tokenSchema = z.string().length(6);
+
+    try {
+      tokenSchema.parse(token);
+    } catch (error) {
+      return redirect(`/login/code?message=Invalid code`);
+    }
 
     const cookieStore = cookies();
-    if (cookieStore.get("duringCode")?.value !== "true") {
-      console.log("Validating code 2");
-      cookieStore.set("duringCode", "true");
+    const supabase = createClient(cookieStore);
 
-      const token =
-        (formData.get("num1") as string) +
-        formData.get("num2") +
-        formData.get("num3") +
-        formData.get("num4") +
-        formData.get("num5") +
-        formData.get("num6");
+    const email = cookieStore.get("emailForSignIn")?.value as string;
 
-      const tokenSchema = z.string().length(6);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.verifyOtp({
+      email: email,
+      token: token,
+      type: "email",
+    });
 
-      try {
-        tokenSchema.parse(token);
-      } catch (error) {
-        cookieStore.delete("duringCode");
-        return redirect(`/login/code?message=Invalid code`);
-      }
+    if (error) {
+      return redirect(`/login/code?message=Incorrect value`);
+    }
 
-      const supabase = createClient(cookieStore);
-
-      const email = cookieStore.get("emailForSignIn")?.value as string;
-
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.verifyOtp({
-        email: email,
-        token: token,
-        type: "email",
+    if (session) {
+      const { error } = await supabase.auth.setSession({
+        access_token: session.access_token,
+        refresh_token: session.refresh_token,
       });
 
       if (error) {
-        cookieStore.delete("duringCode");
-        return redirect(`/login/code?message=Incorrect value`);
+        return redirect(`/login?message=Session error`);
       }
-
-      if (session) {
-        const { error } = await supabase.auth.setSession({
-          access_token: session.access_token,
-          refresh_token: session.refresh_token,
-        });
-
-        if (error) {
-          cookieStore.delete("duringCode");
-          return redirect(`/login?message=Session error`);
-        }
-      }
-
-      setTimeout(() => {
-        cookieStore.delete("emailForSignIn");
-        cookieStore.delete("duringCode");
-      }, 10000);
-
-      return redirect("/");
     }
+
+    cookieStore.delete("emailForSignIn");
+
+    return redirect("/");
   };
 
   return (

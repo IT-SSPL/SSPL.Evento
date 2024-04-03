@@ -43,6 +43,8 @@ export const CodeForm = ({
               alert("Nieprawidłowy kod");
             }
 
+            console.log(code);
+
             if (code.length === 6) {
               const inputs = document.querySelectorAll("[name^=num]");
 
