@@ -38,6 +38,8 @@ export default function LoginPage({
       return redirect("/login?message=Too many requests. Try again later.");
     }
 
+    cookieStore.set("emailForSignIn", email);
+
     return redirect(`/login/code`);
   };
 
