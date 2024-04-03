@@ -19,7 +19,7 @@ async function CrewPage() {
       title={
         <>
           <CustomIcon name="crewModuleIcon" className="mr-2" />
-          Kadra
+          Organizatorzy
         </>
       }
       hasSidebar
