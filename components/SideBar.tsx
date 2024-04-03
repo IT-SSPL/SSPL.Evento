@@ -11,13 +11,18 @@ import { emptyIfNull } from "@/utils/emptyIfNull";
 
 export const SideBarModuleList = ({ modules }: { modules: IModule[] }) => {
   const modulesList = [{ name: "Strona główna", path: "" }, ...modules];
+
   return (
     <ul className="menu p-4 w-80 min-h-full bg-base-200 flex-1">
       {/* Sidebar content here */}
       {modulesList?.map((e, i) => (
         <li key={i} className="border-b">
           <Link
-            href={`/${e.path}`}
+            href={`${
+              e.path.includes("http")
+                ? e.path.replace("redirect:", "")
+                : "/" + e.path
+            }`}
             className="btn-ghost text-lg py-4"
             onClick={() => {
               (
@@ -25,7 +30,13 @@ export const SideBarModuleList = ({ modules }: { modules: IModule[] }) => {
               ).checked = false;
             }}
           >
-            {<CustomIcon name={`${e.path}ModuleIcon`} />}
+            {
+              <CustomIcon
+                name={`${
+                  e.path.includes("redirect:") ? "redirect" : e.path
+                }ModuleIcon`}
+              />
+            }
             {capitalizeFirstLetter(e.name)}
           </Link>
         </li>

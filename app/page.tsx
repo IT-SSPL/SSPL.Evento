@@ -28,10 +28,20 @@ export default async function IndexPage() {
               modules?.map((e, i) => (
                 <li key={i} className="border-b">
                   <Link
-                    href={`/${e.path}`}
+                    href={`${
+                      e.path.includes("http")
+                        ? e.path.replace("redirect:", "")
+                        : "/" + e.path
+                    }`}
                     className="btn-ghost text-lg py-4 w-full flex justify-center"
                   >
-                    {<CustomIcon name={`${e.path}ModuleIcon`} />}
+                    {
+                      <CustomIcon
+                        name={`${
+                          e.path.includes("redirect:") ? "redirect" : e.path
+                        }ModuleIcon`}
+                      />
+                    }
                     {capitalizeFirstLetter(e.name)}
                   </Link>
                 </li>

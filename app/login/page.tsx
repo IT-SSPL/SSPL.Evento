@@ -4,6 +4,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { z } from "zod";
 
 import { createClient } from "@/utils/supabase/server";
+import { EmailForm } from "./EmailForm";
 
 export default function LoginPage({
   searchParams,
@@ -37,33 +38,12 @@ export default function LoginPage({
       return redirect("/login?message=Too many requests. Try again later.");
     }
 
-    cookieStore.set("emailForSignIn", email);
-
     return redirect(`/login/code`);
   };
 
   return (
     <>
-      <form className="w-full max-w-xs" action={signIn}>
-        <label className="label" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="input input-bordered input-primary w-full"
-          name="email"
-          type="email"
-          placeholder="you@example.com"
-          required
-        />
-
-        <div className="divider"></div>
-
-        <div className="form-control gap-4">
-          <button className="btn btn-primary" type="submit">
-            Zaloguj się
-          </button>
-        </div>
-      </form>
+      <EmailForm signIn={signIn} />
       {searchParams?.message && (
         <p className="alert absolute bottom-20 w-full max-w-sm">
           <IoIosCloseCircleOutline className="text-3xl" />
