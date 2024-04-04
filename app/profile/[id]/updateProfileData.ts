@@ -21,6 +21,7 @@ export const updateProfileData = async (
   const facebook = formData.get("facebook") as string;
   const image = formData.get("image") as File;
   const description = formData.get("description") as string;
+  const university = formData.get("university") as string;
 
   const userData = {
     name: name === "" ? null : name,
@@ -29,6 +30,7 @@ export const updateProfileData = async (
     room: room === "" ? null : room,
     facebook: facebook === "" ? null : facebook,
     description: description === "" ? null : description,
+    university: university === "" ? null : university,
   };
 
   // validate data
@@ -75,6 +77,7 @@ export const updateProfileData = async (
       facebook_nickname: userData.facebook,
       description: userData.description,
       image_path: image_path || user.image_path,
+      university: userData.university,
     })
     .eq("id", user?.id!);
 

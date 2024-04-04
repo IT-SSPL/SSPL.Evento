@@ -24,7 +24,10 @@ import Confetti from "react-confetti";
 export interface IUserForSwipe {
   id: string;
   name: string | null;
+  surname: string | null;
   image_path: string;
+  description: string | null;
+  room: string | null;
 }
 
 export const SwipeSection = ({ user }: { user: User }) => {
@@ -65,7 +68,7 @@ export const SwipeSection = ({ user }: { user: User }) => {
 
       const { data: users } = await supabase
         .from("users")
-        .select("id, name, image_path")
+        .select("id, name, surname, image_path, description, room, university")
         .not("name", "is", null)
         .not("surname", "is", null)
         .not("facebook_nickname", "is", null)
@@ -158,28 +161,34 @@ export const SwipeSection = ({ user }: { user: User }) => {
             <div className="stack">
               {usersForSwipe ? (
                 usersForSwipe.length !== 0 ? (
-                  usersForSwipe.map((user, i) =>
-                    i === 0 ? (
-                      <Draggable id="draggable" user={user} key={user.id} />
-                    ) : (
-                      <div className="avatar" key={user.id}>
-                        <div className="w-64 rounded-xl">
-                          <Image
-                            width={300}
-                            height={300}
-                            src={`${
-                              process.env.NEXT_PUBLIC_SUPABASE_URL as string
-                            }/storage/v1/object/public/profile-icons/${
-                              user.image_path
-                            }`}
-                            alt="User profile picture"
-                            className="w-full pointer-events-none"
-                          />
-                        </div>
-                      </div>
-                    )
-                  )
+                  // usersForSwipe.map(
+                  //   (user) => (
+                  // i === 0 ? (
+                  <Draggable
+                    id="draggable"
+                    user={usersForSwipe[0]}
+                    key={usersForSwipe[0].id}
+                  />
                 ) : (
+                  // )
+                  // ) : (
+                  // <div className="avatar" key={user.id}>
+                  //   <div className="w-64 h-64 rounded-xl">
+                  //     <Image
+                  //       width={300}
+                  //       height={300}
+                  //       src={`${
+                  //         process.env.NEXT_PUBLIC_SUPABASE_URL as string
+                  //       }/storage/v1/object/public/profile-icons/${
+                  //         user.image_path
+                  //       }`}
+                  //       alt="User profile picture"
+                  //       className="w-full pointer-events-none"
+                  //     />
+                  //   </div>
+                  // </div>
+                  // )
+                  // )
                   <div className="flex flex-col items-center animate-pulse">
                     <PiGhostLight className="text-xl animate-ghost" />
                     Pusto tutaj...

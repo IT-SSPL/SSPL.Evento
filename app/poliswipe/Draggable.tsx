@@ -6,6 +6,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { useDraggable } from "@dnd-kit/core";
 
 import { IUserForSwipe } from "./SwipeSection";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { LuKeySquare } from "react-icons/lu";
 
 export function Draggable({ id, user }: { id: string; user: IUserForSwipe }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -18,7 +20,7 @@ export function Draggable({ id, user }: { id: string; user: IUserForSwipe }) {
 
   return (
     <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div className="avatar">
+      <div className="avatar w-64 rounded-xl flex flex-col">
         <div className="w-64 rounded-xl">
           <Image
             width={300}
@@ -30,6 +32,10 @@ export function Draggable({ id, user }: { id: string; user: IUserForSwipe }) {
             className="w-full pointer-events-none"
           />
         </div>
+        <h1 className="font-bold text-xl mt-6">
+          {user.name} {user.surname}
+        </h1>
+        <p className="my-4 text-left">{user.description}</p>
       </div>
     </button>
   );
