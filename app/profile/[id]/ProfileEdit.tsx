@@ -60,7 +60,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
       }}
     >
       <InputRow
-        label="Imię"
+        label="Imię*"
         value={user.name}
         name="name"
         tooptip="od 1 do 30 znaków"
@@ -68,7 +68,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
       />
 
       <InputRow
-        label="Nazwisko"
+        label="Nazwisko*"
         value={user.surname}
         name="surname"
         tooptip="od 1 do 30 znaków"
@@ -76,7 +76,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
       />
 
       <InputRow
-        label="Email"
+        label="Email*"
         value={user.email}
         name="email"
         isDisabled
@@ -103,19 +103,26 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
       />
 
       <InputRow
-        label="Facebook"
+        label="Uczelnia"
+        value={user.university}
+        name="university"
+        hasDivider
+      />
+
+      <InputRow
+        label="Facebook*"
         value={user.facebook_nickname}
         name="facebook"
         placeholderText="nickname"
-        tooptip="nickname do profilu facebook"
+        tooptip="końcówka URL po https://www.facebook.com/"
         hasDivider
       />
 
       <div className="join-item flex items-center justify-between">
-        <p className="font-bold text-lg">Zdjęcie:</p>
+        <p className="font-bold text-lg">Zdjęcie*:</p>
         <input
           type="file"
-          className="ml-2 file-input file-input-ghost w-full p-2 h-8"
+          className="ml-2 file-input file-input-ghost w-full h-8"
           name="image"
         />
       </div>
@@ -123,7 +130,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
 
       <div className="join-item flex justify-between">
         <p className="font-bold text-lg">Opis:</p>
-        <div className="tooltip" data-tip="do 200 znaków">
+        <div className="tooltip w-full ml-5" data-tip="do 200 znaków">
           <textarea
             className="ml-2 textarea textarea-ghost w-full"
             rows={4}

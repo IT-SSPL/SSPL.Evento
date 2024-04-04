@@ -15,6 +15,8 @@ import { IoCalendar } from "react-icons/io5";
 import { HiHome } from "react-icons/hi2";
 import { FaRegSnowflake } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
+import { FaMapPin } from "react-icons/fa";
+import { FaPenNib } from "react-icons/fa";
 
 type IconProps = {
   name: string;
@@ -33,6 +35,8 @@ const CustomIcon = (props: IconProps) => {
     poliswipeModuleIcon: <PiHandHeartFill {...svgProps} />,
     matchesModuleIcon: <BsPeopleFill {...svgProps} />,
     redirectModuleIcon: <IoLogoFacebook {...svgProps} />,
+    coursesModuleIcon: <FaPenNib {...svgProps} />,
+    mapModuleIcon: <FaMapPin {...svgProps} />,
 
     ModuleIcon: <HiHome {...svgProps} />,
     SunDayIcon: <FaBus {...svgProps} />,

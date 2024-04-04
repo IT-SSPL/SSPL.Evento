@@ -40,6 +40,9 @@ export const ProfileInfo = ({ user }: { user: Tables<"users"> }) => {
           hasDivider
         />
       )}
+      {user.university && (
+        <DataBox label="Uczelnia" value={user.university} hasDivider />
+      )}
       {user.phone && (
         <DataBox
           label="Telefon"
