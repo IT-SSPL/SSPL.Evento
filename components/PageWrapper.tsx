@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { MdFeedback } from "react-icons/md";
 
 import { createClient } from "@/utils/supabase/server";
 import { SideBarModuleList, SideBarProfile } from "./SideBar";
@@ -62,6 +63,13 @@ export default async function PageWrapper({
             </form>
           </div>
         )}
+        <a
+          href="https://forms.gle/7875uaxmtNhKgB4S7"
+          target="_blank"
+          className="text-xs fixed bottom-20 px-4 flex gap-1 items-center"
+        >
+          <MdFeedback /> Feedback
+        </a>
       </div>
     </div>
   );
