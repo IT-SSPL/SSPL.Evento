@@ -28,7 +28,10 @@ async function InfoPage() {
     .single();
 
   const canSendMessages =
-    userRole && (userRole.role === "kadra" || userRole.role === "IT");
+    userRole &&
+    (userRole.role === "kadra" ||
+      userRole.role === "IT" ||
+      userRole.role === "user");
 
   return (
     <ContentWithNav
@@ -44,7 +47,7 @@ async function InfoPage() {
       <main className="animate-in flex-1 w-full max-h-full">
         {messages && <RealtimeInfoMessages serverInfoMessages={messages} />}
       </main>
-      {canSendMessages && <SendMessageInput />}
+      {canSendMessages && <SendMessageInput role={userRole.role!} />}
     </ContentWithNav>
   );
 }

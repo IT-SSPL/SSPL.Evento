@@ -50,16 +50,19 @@ export type Database = {
           created_at: string
           id: number
           message: string | null
+          type: string
         }
         Insert: {
           created_at?: string
           id?: number
           message?: string | null
+          type: string
         }
         Update: {
           created_at?: string
           id?: number
           message?: string | null
+          type?: string
         }
         Relationships: []
       }
@@ -191,7 +194,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           facebook_nickname?: string | null
-          id?: string
+          id: string
           image_path?: string
           name?: string | null
           phone?: string | null
@@ -214,7 +217,15 @@ export type Database = {
           surname?: string | null
           university?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

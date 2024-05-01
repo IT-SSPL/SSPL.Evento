@@ -38,7 +38,7 @@ export const updateProfileData = async (
   const surnameSchema = z.string().min(1).max(30);
   const phoneSchema = z.nullable(z.string().length(9));
   const facebookSchema = z.nullable(z.string().max(30));
-  const descriptionSchema = z.nullable(z.string().max(200));
+  const descriptionSchema = z.nullable(z.string().max(250));
 
   try {
     nameSchema.parse(userData.name);

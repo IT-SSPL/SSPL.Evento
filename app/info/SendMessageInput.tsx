@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { set, z } from "zod";
+import { z } from "zod";
 import { createClient } from "@/utils/supabase/client";
 
-export const SendMessageInput = () => {
+export const SendMessageInput = ({ role }: { role: string }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ export const SendMessageInput = () => {
     }
 
     setInputValue("");
-    await supabase.from("messages").insert([{ message: message }]);
+    await supabase.from("messages").insert([{ message: message, type: role }]);
   }
 
   return (

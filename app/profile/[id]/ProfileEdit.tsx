@@ -130,7 +130,7 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
 
       <div className="join-item flex justify-between">
         <p className="font-bold text-lg">Opis:</p>
-        <div className="tooltip w-full ml-5" data-tip="do 200 znaków">
+        <div className="tooltip w-full ml-5" data-tip="do 250 znaków">
           <textarea
             className="ml-2 textarea textarea-ghost w-full"
             rows={4}
