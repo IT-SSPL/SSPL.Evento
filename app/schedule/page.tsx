@@ -1,19 +1,19 @@
 import { cookies } from "next/headers";
-import Image from "next/image";
+// import Image from "next/image";
 
 import { createClient } from "@/utils/supabase/server";
 import ContentWithNav from "@/components/ContentWithNav";
 import CustomIcon from "@/components/CustomIcon";
 
 async function SchedulePage() {
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore);
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
-  // const { data: days } = await supabase.from("days").select("*");
+  const { data: days } = await supabase.from("days").select("*").order("id");
 
-  // const { data: scheduleEntries } = await supabase
-  //   .from("schedules")
-  //   .select("*");
+  const { data: scheduleEntries } = await supabase
+    .from("schedules")
+    .select("*");
 
   return (
     <ContentWithNav
@@ -26,7 +26,7 @@ async function SchedulePage() {
       hasSidebar
     >
       <main className="animate-in flex flex-col w-screen -mx-2 sm:-mx-8 md:-mx-16 lg:-mx-24">
-        {/* {days &&
+        {days &&
           days.map((day, i) => (
             <div className="block w-full mb-4" key={i}>
               <div className="collapse bg-primary">
@@ -41,6 +41,7 @@ async function SchedulePage() {
                   {scheduleEntries &&
                     scheduleEntries
                       .filter((entry) => entry.day === day.display_name)
+                      .sort((a, b) => a.element_number! - b.element_number!)
                       .map((entry, i) => (
                         <div
                           className="grid grid-cols-2 items-baseline"
@@ -53,14 +54,14 @@ async function SchedulePage() {
                 </div>
               </div>
             </div>
-          ))} */}
-        <Image
+          ))}
+        {/* <Image
           src="/images/schedule.jpg"
           alt="Schedule image"
           width={600}
           height={1000}
           className="w-full rounded-lg shadow-lg"
-        />
+        /> */}
       </main>
     </ContentWithNav>
   );
