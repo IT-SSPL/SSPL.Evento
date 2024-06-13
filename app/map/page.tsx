@@ -15,8 +15,8 @@ async function MapPage() {
       }
       hasSidebar
     >
-      <main className="animate-in w-full flex justify-center overflow-y-hidden overflow-x-scroll" id="scrollable">
-        <figure className="w-[65rem] h-auto absolute left-0 top-0 translate-x-[-32.5%]" id="image">
+      <main className="animate-in w-full flex justify-center overflow-y-hidden overflow-x-scroll hidden-scroll" id="scrollable">
+        <figure className="aspect-video h-[75vh] absolute left-0 top-0 translate-x-[-32.5%]" id="image">
           <img src="/images/waszeta-mapka.webp" className="w-full h-full" alt="Waszeta maps" />
         </figure>
       </main>

@@ -20,6 +20,7 @@ import { FaPenNib } from "react-icons/fa";
 import { TbKayak } from "react-icons/tb";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FaMap } from "react-icons/fa6";
+import { BsUiChecksGrid } from "react-icons/bs";
 
 type IconProps = {
   name: string;
@@ -40,6 +41,7 @@ const CustomIcon = (props: IconProps) => {
     redirectModuleIcon: <IoLogoFacebook {...svgProps} />,
     coursesModuleIcon: <FaPenNib {...svgProps} />,
     mapModuleIcon: <FaMap {...svgProps} />,
+    bingoModuleIcon: <BsUiChecksGrid {...svgProps} />,
 
     ModuleIcon: <HiHome {...svgProps} />,
     SunDayIcon: <FaHome {...svgProps} />,
