@@ -19,6 +19,7 @@ import { FaMapPin } from "react-icons/fa";
 import { FaPenNib } from "react-icons/fa";
 import { TbKayak } from "react-icons/tb";
 import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaMap } from "react-icons/fa6";
 
 type IconProps = {
   name: string;
@@ -38,7 +39,7 @@ const CustomIcon = (props: IconProps) => {
     matchesModuleIcon: <BsPeopleFill {...svgProps} />,
     redirectModuleIcon: <IoLogoFacebook {...svgProps} />,
     coursesModuleIcon: <FaPenNib {...svgProps} />,
-    mapModuleIcon: <FaMapPin {...svgProps} />,
+    mapModuleIcon: <FaMap {...svgProps} />,
 
     ModuleIcon: <HiHome {...svgProps} />,
     SunDayIcon: <FaHome {...svgProps} />,

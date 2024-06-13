@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 200 20% 98%;
-    --foreground: 200 50% 3%;
-    /* --btn-background: 200 10% 91%;
+    :root {
+        --background: 200 20% 98%;
+        --foreground: 200 50% 3%;
+        /* --btn-background: 200 10% 91%;
     --btn-background-hover: 200 10% 89%; */
-  }
+    }
 
-  /* @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
     :root {
       --background: 200 50% 3%;
       --btn-background: 200 10% 9%;
@@ -21,36 +21,41 @@
 }
 
 @layer base {
-  * {
-    @apply border-foreground/20;
-    @apply box-border;
-  }
+    * {
+        @apply border-foreground/20;
+        @apply box-border;
+    }
 
-  /* Remove arrow from input[type="number"] */
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+    /* Remove arrow from input[type="number"] */
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-  /* Firefox */
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
+    /* Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
 }
 
 .animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
+    animation: animateIn 0.3s ease 0.15s both;
 }
 
 @keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#scrollable::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
