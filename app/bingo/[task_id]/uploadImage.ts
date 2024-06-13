@@ -41,5 +41,5 @@ export const uploadImage = async (formData: FormData, taskId: string, userId: st
     return redirect(`/bingo/${taskId}?message=Wystąpił błąd`);
   }
 
-  return redirect(`/bingo/${taskId}`);
+  return redirect(`/bingo/${taskId}?success=Ukończono zadanie!`);
 };
