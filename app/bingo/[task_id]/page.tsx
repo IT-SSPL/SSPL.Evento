@@ -50,7 +50,8 @@ const BingoTaskPage = async ({ params, searchParams }: { params: { task_id: stri
       <ContentWithNav title="" hasSidebar>
         <main className="animate-in flex-1 flex flex-col w-full">
           <h1 className="font-bold text-2xl">{capitalizeFirstLetter(taskDetails.name)}</h1>
-          <p className="py-2 px-1">{capitalizeFirstLetter(taskDetails.description)}</p>
+          <h2 className="pt-2 font-semibold text-lg">Treść:</h2>
+          <p className="pb-2 px-1">{capitalizeFirstLetter(taskDetails.description)}</p>
 
           <div className="divider m-0.5" />
           {allTaskDetails && allTaskDetails.length > 0 && (
@@ -84,7 +85,8 @@ const BingoTaskPage = async ({ params, searchParams }: { params: { task_id: stri
           )}
 
           <h1 className="font-bold text-2xl">{capitalizeFirstLetter(taskDetails.name)}</h1>
-          <p className="py-2 px-1">{capitalizeFirstLetter(taskDetails.description)}</p>
+          <h2 className="pt-2 font-semibold text-lg">Treść:</h2>
+          <p className="pb-2 px-1">{capitalizeFirstLetter(taskDetails.description)}</p>
 
           <div className="divider m-0.5" />
           {taskDone !== null ? (

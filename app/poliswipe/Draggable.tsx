@@ -13,8 +13,6 @@ export function Draggable({ id, user }: { id: string; user: IUserForSwipe }) {
     id: id,
   });
 
-  console.log(active);
-
   const style = {
     transform: CSS.Translate.toString(transform),
   };
@@ -27,14 +25,14 @@ export function Draggable({ id, user }: { id: string; user: IUserForSwipe }) {
             <Image width={300} height={300} src={`${process.env.NEXT_PUBLIC_SUPABASE_URL as string}/storage/v1/object/public/profile-icons/${user.image_path}`} alt="User profile picture" className="w-full pointer-events-none" />
           </div>
         </div>
-        {active === null && (
-          <>
-            <h1 className="font-bold text-xl mt-4">
-              {user.name} {user.surname}
-            </h1>
-            <p className="my-2 tex-center h-16 overflow-y-scroll hidden-scroll">{user.description}</p>
-          </>
-        )}
+        {/* {active === null && (
+          <> */}
+        <h1 className="font-bold text-xl mt-4">
+          {user.name} {user.surname}
+        </h1>
+        <p className="my-2 tex-center h-16 overflow-y-scroll hidden-scroll">{user.description}</p>
+        {/* </>
+        )} */}
       </div>
     </button>
   );

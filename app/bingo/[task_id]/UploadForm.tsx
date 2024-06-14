@@ -12,7 +12,7 @@ export const UploadForm = ({ taskId, userId }: { taskId: string; userId: string 
       }}
     >
       <div className="py-4">
-        <input type="file" className="ml-2 file-input file-input-ghost w-full h-8" name="image" />
+        <input type="file" className="ml-2 file-input file-input-ghost w-full h-8" name="image" accept="image/*" />
       </div>
 
       <div className="form-control my-8">

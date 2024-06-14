@@ -33,16 +33,7 @@ const InputRow = ({
       <div className="join-item flex self-end items-center">
         <p className="font-bold text-lg">{label}:</p>
         <div className="tooltip" data-tip={tooptip}>
-          <input
-            className="ml-2 input input-ghost w-full p-2 h-8"
-            placeholder={placeholderText}
-            pattern={pattern}
-            name={name}
-            value={inputValue || ""}
-            onChange={(e) => setInputValue(e.target.value)}
-            disabled={isDisabled}
-            type={type}
-          />
+          <input className="ml-2 input input-ghost w-full p-2 h-8" placeholder={placeholderText} pattern={pattern} name={name} value={inputValue || ""} onChange={(e) => setInputValue(e.target.value)} disabled={isDisabled} type={type} />
         </div>
       </div>
       {hasDivider && <div className="divider m-0.5" />}
@@ -59,84 +50,30 @@ export const ProfileEdit = ({ user }: { user: Tables<"users"> }) => {
         await updateProfileData(e, user);
       }}
     >
-      <InputRow
-        label="Imię*"
-        value={user.name}
-        name="name"
-        tooptip="od 1 do 30 znaków"
-        hasDivider
-      />
+      <InputRow label="Imię*" value={user.name} name="name" tooptip="od 1 do 30 znaków" hasDivider />
 
-      <InputRow
-        label="Nazwisko*"
-        value={user.surname}
-        name="surname"
-        tooptip="od 1 do 30 znaków"
-        hasDivider
-      />
+      <InputRow label="Nazwisko*" value={user.surname} name="surname" tooptip="od 1 do 30 znaków" hasDivider />
 
-      <InputRow
-        label="Email*"
-        value={user.email}
-        name="email"
-        isDisabled
-        hasDivider
-      />
+      <InputRow label="Email*" value={user.email} name="email" isDisabled hasDivider />
 
-      <InputRow
-        label="Telefon"
-        value={user.phone}
-        name="phone"
-        placeholderText="000000000"
-        pattern="[0-9]{9}"
-        type="tel"
-        tooptip="format xxxxxxxxx"
-        hasDivider
-      />
+      <InputRow label="Telefon" value={user.phone} name="phone" placeholderText="000000000" pattern="[0-9]{9}" type="tel" tooptip="format xxxxxxxxx" hasDivider />
 
-      <InputRow
-        label="Pokój"
-        value={user.room}
-        name="room"
-        placeholderText=".../..."
-        hasDivider
-      />
+      <InputRow label="Pokój" value={user.room} name="room" placeholderText=".../..." hasDivider />
 
-      <InputRow
-        label="Uczelnia"
-        value={user.university}
-        name="university"
-        hasDivider
-      />
+      <InputRow label="Uczelnia" value={user.university} name="university" hasDivider />
 
-      <InputRow
-        label="Facebook*"
-        value={user.facebook_nickname}
-        name="facebook"
-        placeholderText="nickname"
-        tooptip="końcówka URL po https://www.facebook.com/"
-        hasDivider
-      />
+      <InputRow label="Facebook*" value={user.facebook_nickname} name="facebook" placeholderText="nickname" tooptip="końcówka URL po https://www.facebook.com/" hasDivider />
 
       <div className="join-item flex items-center justify-between">
         <p className="font-bold text-lg">Zdjęcie*:</p>
-        <input
-          type="file"
-          className="ml-2 file-input file-input-ghost w-full h-8"
-          name="image"
-        />
+        <input type="file" className="ml-2 file-input file-input-ghost w-full h-8" name="image" accept="image/*" />
       </div>
       <div className="divider m-0.5" />
 
       <div className="join-item flex justify-between">
         <p className="font-bold text-lg">Opis:</p>
         <div className="tooltip w-full ml-5" data-tip="do 250 znaków">
-          <textarea
-            className="ml-2 textarea textarea-ghost w-full"
-            rows={4}
-            name="description"
-            defaultValue={user.description || ""}
-          ></textarea>
+          <textarea className="ml-2 textarea textarea-ghost w-full" rows={4} name="description" defaultValue={user.description || ""}></textarea>
         </div>
       </div>
 
